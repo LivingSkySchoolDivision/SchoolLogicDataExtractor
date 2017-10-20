@@ -9,7 +9,7 @@ namespace SchoolLogicDataExtractor
     class School
     {
         public int iSchoolID { get; set; }
-        public string DAN { get; set; }
+        public string DAN { get { return this.GovernmentID; } }
         public string Name { get; set; }
         public string GovernmentID { get; set; }
 

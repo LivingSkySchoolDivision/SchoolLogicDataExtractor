@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D34415CD-B22A-449E-BDFA-B13A4EF4748B}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SchoolLogicDataExtractor</RootNamespace>
-    <AssemblyName>SchoolLogicDataExtractor</AssemblyName>
+    <ProjectGuid>{81C73D54-8C60-45EE-8D1C-A8CB900164B3}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Extract_ClevrStudentDemographics</RootNamespace>
+    <AssemblyName>Extract-ClevrStudentDemographics</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,34 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exceptions\ConfigFileNotFoundException.cs" />
-    <Compile Include="Exceptions\SyntaxException.cs" />
-    <Compile Include="Extensions\ExtensionMethodsLists.cs" />
-    <Compile Include="Extensions\ExtensionMethodsString.cs" />
-    <Compile Include="Helpers\FileHelpers.cs" />
-    <Compile Include="Helpers\Parsers.cs" />
-    <Compile Include="Helpers\Settings.cs" />
-    <Compile Include="Model\AbsenceStatisticsResponse.cs" />
-    <Compile Include="Model\Address.cs" />
-    <Compile Include="Model\Contact.cs" />
-    <Compile Include="Model\School.cs" />
-    <Compile Include="Model\StaffMember.cs" />
-    <Compile Include="Model\Student.cs" />
-    <Compile Include="Model\StudentAbsenceStatistics.cs" />
-    <Compile Include="Model\StudentContact.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reports\Clevr\ClevrStaffList.cs" />
-    <Compile Include="Reports\Clevr\ClevrStudentDemographicsList.cs" />
-    <Compile Include="Reports\Clevr\ClevrStudentList.cs" />
-    <Compile Include="Repositories\AbsenceStatisticsRepository.cs" />
-    <Compile Include="Repositories\ContactRepository.cs" />
-    <Compile Include="Repositories\MailingAddressRepository.cs" />
-    <Compile Include="Repositories\SchoolRepository.cs" />
-    <Compile Include="Repositories\StaffRepository.cs" />
-    <Compile Include="Repositories\StudentRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Reports\Xello\" />
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SchoolLogicDataExtractor\SchoolLogicDataExtractor.csproj">
+      <Project>{d34415cd-b22a-449e-bdfa-b13a4ef4748b}</Project>
+      <Name>SchoolLogicDataExtractor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

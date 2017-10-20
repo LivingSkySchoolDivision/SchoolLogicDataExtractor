@@ -12,13 +12,31 @@ namespace SchoolLogicDataExtractor
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public Address Address { get; set; }
+        public Address Address_Physical { get; set; }
+        public Address Addrses_Mailing { get; set; }
         public string HomePhone { get; set; }
         public string WorkPhone { get; set; }
+        public string CellPhone { get; set; }
+        public string DisplayName
+        {
+            get
+            {
+                return this.FirstName + " " + this.LastName;
+            }
+        }
+
+        public string DisplayNameLastNameFirst
+        {
+            get
+            {
+                return this.LastName + ", " + this.FirstName;
+            }
+        }
 
         public Contact()
         {
-            this.Address = new Address();
+            this.Address_Physical = new Address();
+            this.Addrses_Mailing = new Address();
         }
 
         public override string ToString()

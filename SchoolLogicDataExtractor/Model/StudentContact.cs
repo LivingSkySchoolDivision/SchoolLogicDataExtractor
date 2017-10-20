@@ -14,6 +14,11 @@ namespace SchoolLogicDataExtractor
         public bool LivesWithStudent { get; set; }
         public int Priority { get; set; }
 
+        public StudentContact()
+        {
+            this.Contact = new Contact();
+        }
+
         public override string ToString()
         {
             return this.Contact.ToString() + " (" + this.Relation + ")";

@@ -13,6 +13,8 @@ namespace SchoolLogicDataExtractor
         private readonly Dictionary<int, Student> _allStudents = new Dictionary<int, Student>();
         private readonly SchoolRepository _schoolRepo = new SchoolRepository();
         private readonly ContactRepository _contactRepo = new ContactRepository();
+        private readonly AbsenceStatisticsRepository _absenceRepo = new AbsenceStatisticsRepository();
+        private readonly MailingAddressRepository _mailingAddressRepo = new MailingAddressRepository();
 
         private string SQL = "SELECT         " +
                                   "StudentStatus.iStudentID,  " +
@@ -32,6 +34,7 @@ namespace SchoolLogicDataExtractor
                                   "Student.iTrackID,  " +
                                   "Student.iSchoolID AS Expr1,  " +
                                   "Student.mMedical,  " +
+                                  "Location.cPhone,  " +
                                   "Location.cApartment,  " +
                                   "Location.cHouseNo,  " +
                                   "Location.cPostalCode,  " +
@@ -47,12 +50,14 @@ namespace SchoolLogicDataExtractor
                                   "(SELECT COUNT(*) AS Expr1 FROM MarksHistory WHERE (iStudentID = StudentStatus.iStudentID) AND (nCreditEarned > 0)) AS Credits,  " +
                                   "LookupValues_4.cName AS LanguageSpokenAtHome,  " +
                                   "LookupValues.cName AS CountryOfOrigin,  " +
-                                  "Grades.cName AS Grade " +
+                                  "Grades.cName AS Grade, " +
+                                  "Student.mCellPhone , " +
+                                  "LookupValues_5.cName AS mProgram " +
                             "FROM " +
                                     "UserStudent " +
                                     "RIGHT OUTER JOIN Country AS Country_1 " +
                                     "RIGHT OUTER JOIN Location ON Country_1.iCountryID = Location.iCountryID " +
-                                    "RIGHT OUTER JOIN Student ON Location.iLocationID = Student.iLocationID " +
+                                    "RIGHT OUTER JOIN Student ON Location.iLocationID = Student.iLocationID " +                                        
                                     "ON UserStudent.iStudentID = Student.iStudentID " +
                                     "LEFT OUTER JOIN Grades ON Student.iGradesID = Grades.iGradesID " +
                                     "LEFT OUTER JOIN LookupValues ON UserStudent.UF_1657 = LookupValues.iLookupValuesID " +
@@ -63,7 +68,8 @@ namespace SchoolLogicDataExtractor
                                     "LEFT OUTER JOIN LookupValues AS LookupValues_3 ON Location.iLV_RegionID = LookupValues_3.iLookupValuesID " +
                                     "LEFT OUTER JOIN LookupValues AS LookupValues_2 ON Location.iLV_CityID = LookupValues_2.iLookupValuesID " +
                                     "LEFT OUTER JOIN LookupValues AS LookupValues_1 ON Student.iLV_GenderID = LookupValues_1.iLookupValuesID " +
-                                    "RIGHT OUTER JOIN StudentStatus ON Student.iStudentID = StudentStatus.iStudentID " +
+                                    "RIGHT OUTER JOIN StudentStatus ON Student.iStudentID = StudentStatus.iStudentID " +                                    
+                                    "LEFT OUTER JOIN LookupValues AS LookupValues_5 ON UserStudent.UF_1658=LookupValues_5.iLookupValuesID " + 
 
                             "WHERE         " +
                                   "(StudentStatus.lOutsideStatus = 0)  " +
@@ -98,6 +104,8 @@ namespace SchoolLogicDataExtractor
 
         private Student dataReaderToStudent(SqlDataReader dataReader)
         {
+            string homeroomTeacher = (dataReader["HomeroomTeacherfirstname"].ToString() + " " + dataReader["HomeroomTeacherLastname"].ToString()).Trim();
+
             return new Student()
             {
                 StudentNumber = dataReader["cStudentNumber"].ToString().Trim(),
@@ -112,24 +120,33 @@ namespace SchoolLogicDataExtractor
                 LDAPUserName = dataReader["cUsername"].ToString().Trim(),
                 Gender = dataReader["Gender"].ToString().Trim(),
                 GenderInitial = dataReader["GenderCode"].ToString().Trim(),
-                Grade = dataReader["Grade"].ToString().Trim(),
+                GradeUnformatted = dataReader["Grade"].ToString().Trim(),
                 BaseSchool = _schoolRepo.Get(Parsers.ParseInt(dataReader["iSchoolID"].ToString().Trim())),
                 Contacts = _contactRepo.GetForStudent(Parsers.ParseInt(dataReader["iStudentID"].ToString().Trim())),
                 Address_Physical = new Address()
                 {
-                    UnitNumber = dataReader["cApartment"].ToString().Trim(),
-                    HouseNumber = dataReader["cHouseNo"].ToString().Trim(),
-                    Street = dataReader["cStreet"].ToString().Trim(),
-                    City = dataReader["City"].ToString().Trim(),
-                    Province = dataReader["Province"].ToString().Trim(),
-                    PostalCode = dataReader["cPostalCode"].ToString().Trim(),
-                    Country = dataReader["Country"].ToString().Trim(),
+                    UnitNumber = dataReader["cApartment"].ToString().Trim().ToSingleLine(),
+                    HouseNumber = dataReader["cHouseNo"].ToString().Trim().ToSingleLine(),
+                    Street = dataReader["cStreet"].ToString().Trim().ToSingleLine(),
+                    City = dataReader["City"].ToString().Trim().ToSingleLine(),
+                    Province = dataReader["Province"].ToString().Trim().ToSingleLine(),
+                    PostalCode = dataReader["cPostalCode"].ToString().Trim().ToSingleLine(),
+                    Country = dataReader["Country"].ToString().Trim().ToSingleLine(),
+                    Phone = dataReader["cPhone"].ToString().Trim(),
                 },
                 PreviousSchool = _schoolRepo.Get(Parsers.ParseInt(dataReader["iPrevious_SchoolID"].ToString().Trim())),
                 HomeLanguage = dataReader["LanguageSpokenAtHome"].ToString().Trim(),
                 CountryOfOrigin = dataReader["CountryOfOrigin"].ToString().Trim(),
+                LanguageProgram = dataReader["mProgram"].ToString().Trim(),
                 Homeroom = dataReader["HomeroomName"].ToString().Trim(),
+                HomeroomTeacher = homeroomTeacher,
+                Medical = dataReader["mMedical"].ToString().Trim().ToSingleLine(),
                 CreditsEarned = Parsers.ParseDecimal(dataReader["Credits"].ToString().Trim()),
+                YearToDateAttendanceStatistics = _absenceRepo.Get(Parsers.ParseInt(dataReader["iStudentID"].ToString().Trim())),
+                CellPhone = dataReader["mCellPhone"].ToString().Trim(),
+                HomePhone = dataReader["cPhone"].ToString().Trim(),
+                Address_Mailing = _mailingAddressRepo.GetForStudent(Parsers.ParseInt(dataReader["iStudentID"].ToString().Trim()))
+
             };
         }
 

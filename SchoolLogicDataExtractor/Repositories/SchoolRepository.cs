@@ -70,9 +70,9 @@ namespace SchoolLogicDataExtractor
         {
             return new School()
             {
-                Name = "Unknown School",
-                iSchoolID = -1,
-                GovernmentID = "-1",
+                Name = "",
+                iSchoolID = 0,
+                GovernmentID = "0",
                 isFake = true
             };
         }

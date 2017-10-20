@@ -15,6 +15,7 @@ namespace SchoolLogicDataExtractor
         public string Province { get; set; }
         public string PostalCode { get; set; }
         public string Country { get; set; }
+        public string Phone { get; set; }
 
         public string ToStringSingleLine()
         {
@@ -71,7 +72,7 @@ namespace SchoolLogicDataExtractor
             if (!string.IsNullOrEmpty(this.Street))
             {
                 address.Append(this.Street);
-                address.Append("\n");
+                address.Append(", ");
             }
 
             if (!string.IsNullOrEmpty(this.City))
@@ -89,7 +90,7 @@ namespace SchoolLogicDataExtractor
             if (!string.IsNullOrEmpty(this.PostalCode))
             {
                 address.Append(this.PostalCode);
-                address.Append("\n");
+                address.Append(", ");
             }
 
             if (!string.IsNullOrEmpty(this.Country))

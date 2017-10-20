@@ -39,17 +39,48 @@ namespace SchoolLogicDataExtractor
         public string Gender { get; set; }
         public string GenderInitial { get; set; }
         public string GradeUnformatted { get; set; }
-        public string Grade { get; set; }
-                
+        public string Grade
+        {
+            get
+            {
+                string returnMe;
+
+                if (this.GradeUnformatted.ToLower() == "0k")
+                {
+                    returnMe = "K";
+                }
+                else if (this.GradeUnformatted.ToLower() == "k")
+                {
+                    returnMe = "K";
+                }
+                else if (this.GradeUnformatted.ToLower() == "pk")
+                {
+                    returnMe = "PK";
+                }
+                else
+                {
+                    returnMe = Parsers.ParseInt(this.GradeUnformatted).ToString();
+                }
+
+                return returnMe;
+            }
+        }
+
         public Address Address_Physical { get; set; }
+        public Address Address_Mailing { get; set; }
+        public AbsenceStatisticsResponse YearToDateAttendanceStatistics { get; set; }
 
         public List<StudentContact> Contacts { get; set; }
         public School PreviousSchool { get; set; }
+        public string LanguageProgram { get; set; }
         public string HomeLanguage { get; set; }
         public string CountryOfOrigin { get; set; }
         public string Homeroom { get; set; }
+        public string HomeroomTeacher { get; set; }
         public decimal CreditsEarned { get; set; }
-
+        public string CellPhone { get; set; }
+        public string HomePhone { get; set; }
+        public string Medical { get; set; }
         public string DisplayName
         {
             get
@@ -64,6 +95,16 @@ namespace SchoolLogicDataExtractor
             {
                 return this.LastName + ", " + this.FirstName;
             }
+        }
+
+        public Student()
+        {
+            this.Address_Mailing = new Address();
+            this.Address_Physical = new Address();
+            this.YearToDateAttendanceStatistics = new AbsenceStatisticsResponse();
+            this.BaseSchool = new School();
+            this.PreviousSchool = new School();
+            this.Contacts = new List<StudentContact>();
         }
 
         public override string ToString()

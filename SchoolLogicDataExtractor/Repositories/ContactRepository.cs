@@ -14,6 +14,8 @@ namespace SchoolLogicDataExtractor
         // Get list of contacts associated with those students
         // Load only those contacts
 
+        private readonly MailingAddressRepository _mailingAddressRepo = new MailingAddressRepository();
+
         Dictionary<int, Contact> _allContacts = new Dictionary<int, Contact>();
         Dictionary<int, List<StudentContact>> _contactRelationsByStudentID = new Dictionary<int, List<StudentContact>>();
 
@@ -24,6 +26,7 @@ namespace SchoolLogicDataExtractor
                                                         "Contact.cFirstName,  " +
                                                         "Contact.cLastName,  " +
                                                         "Contact.mEmail,  " +
+                                                        "Contact.mCellphone,  " +
                                                         "Contact.cBusPhone,  " +
                                                         "Location.cApartment,  " +
                                                         "Location.cHouseNo,  " +
@@ -216,16 +219,18 @@ namespace SchoolLogicDataExtractor
                 Email = dataReader["mEmail"].ToString().Trim(),
                 HomePhone = dataReader["cPhone"].ToString().Trim(),
                 WorkPhone = dataReader["cBusPhone"].ToString().Trim(),
-                Address = new Address()
+                CellPhone = dataReader["mCellPhone"].ToString().Trim(),
+                Address_Physical = new Address()
                 {
-                    UnitNumber = dataReader["cApartment"].ToString().Trim(),
-                    HouseNumber = dataReader["cHouseNo"].ToString().Trim(),
-                    Street = dataReader["cStreet"].ToString().Trim(),
-                    City = dataReader["City"].ToString().Trim(),
-                    Province = dataReader["Province"].ToString().Trim(),
-                    PostalCode = dataReader["cPostalCode"].ToString().Trim(),
-                    Country = dataReader["Country"].ToString().Trim()
-                }
+                    UnitNumber = dataReader["cApartment"].ToString().Trim().ToSingleLine(),
+                    HouseNumber = dataReader["cHouseNo"].ToString().Trim().ToSingleLine(),
+                    Street = dataReader["cStreet"].ToString().Trim().ToSingleLine(),
+                    City = dataReader["City"].ToString().Trim().ToSingleLine(),
+                    Province = dataReader["Province"].ToString().Trim().ToSingleLine(),
+                    PostalCode = dataReader["cPostalCode"].ToString().Trim().ToSingleLine(),
+                    Country = dataReader["Country"].ToString().Trim().ToSingleLine()
+                },
+                Addrses_Mailing = _mailingAddressRepo.GetForContact(Parsers.ParseInt(dataReader["iContactID"].ToString().Trim()))
             };
         }
 
