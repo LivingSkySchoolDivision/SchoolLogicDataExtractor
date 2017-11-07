@@ -10,6 +10,7 @@ namespace SchoolLogicDataExtractor.Reports.Clevr
     public class ClevrStudentDemographicsList
     {
         private const char delimiter = '\t';
+        private const string stringContainer = "\"";
         private readonly Encoding encoding = Encoding.ASCII;
 
         public MemoryStream GenerateCSV()
@@ -68,26 +69,26 @@ namespace SchoolLogicDataExtractor.Reports.Clevr
 
             foreach (Student student in _studentRepo.GetAll().OrderBy(s => s.BaseSchool.Name).ThenBy(s => s.DisplayNameLastNameFirst))
             {
-                writer.Write(Settings.ClevrTennantID + "" + delimiter);
-                writer.Write(student.StudentNumber + delimiter);
-                writer.Write(student.StudentNumber + delimiter);
-                writer.Write(student.LastName + delimiter);
-                writer.Write(student.FirstName + delimiter);
-                writer.Write(student.DateOfBirth.ToShortDateString() + delimiter);
-                writer.Write(student.BaseSchool.Name + delimiter);
-                writer.Write(student.LanguageProgram + delimiter);
-                writer.Write(student.HomeLanguage + delimiter);
-                writer.Write(student.CountryOfOrigin + delimiter);
-                writer.Write(student.Grade + delimiter);
-                writer.Write(student.HomeroomTeacher + delimiter);
-                writer.Write(student.Address_Physical.Phone + delimiter);
-                writer.Write(student.CellPhone + delimiter);
-                writer.Write(student.CreditsEarned + "" + delimiter);
-                writer.Write(student.Address_Physical.Street + delimiter);
-                writer.Write("" + delimiter); // P.O. Box
-                writer.Write(student.Address_Physical.City + delimiter);
-                writer.Write(student.Address_Physical.PostalCode + delimiter);
-                writer.Write(student.Address_Mailing + delimiter); // Full mailing address
+                writer.Write(stringContainer + Settings.ClevrTennantID + "" + stringContainer + delimiter);
+                writer.Write(stringContainer + student.StudentNumber + stringContainer + delimiter);
+                writer.Write(stringContainer + student.StudentNumber + stringContainer + delimiter);
+                writer.Write(stringContainer + student.LastName + stringContainer + delimiter);
+                writer.Write(stringContainer + student.FirstName + stringContainer + delimiter);
+                writer.Write(stringContainer + student.DateOfBirth.ToShortDateString() + stringContainer + delimiter);
+                writer.Write(stringContainer + student.BaseSchool.Name + stringContainer + delimiter);
+                writer.Write(stringContainer + student.LanguageProgram + stringContainer + delimiter);
+                writer.Write(stringContainer + student.HomeLanguage + stringContainer + delimiter);
+                writer.Write(stringContainer + student.CountryOfOrigin + stringContainer + delimiter);
+                writer.Write(stringContainer + student.Grade + stringContainer + delimiter);
+                writer.Write(stringContainer + student.HomeroomTeacher + stringContainer + delimiter);
+                writer.Write(stringContainer + student.Address_Physical.Phone + stringContainer + delimiter);
+                writer.Write(stringContainer + student.CellPhone + stringContainer + delimiter);
+                writer.Write(stringContainer + student.CreditsEarned + "" + stringContainer + delimiter);
+                writer.Write(stringContainer + student.Address_Physical.Street + stringContainer + delimiter);
+                writer.Write(stringContainer + "" + stringContainer + delimiter); // P.O. Box
+                writer.Write(stringContainer + student.Address_Physical.City + stringContainer + delimiter);
+                writer.Write(stringContainer + student.Address_Physical.PostalCode + stringContainer + delimiter);
+                writer.Write(stringContainer + student.Address_Mailing + stringContainer + delimiter); // Full mailing address
 
                 // Make a list of exactly 3 contacts, contacts must live with, 
                 // If the student doesn't have that many contacts, put a blank one in
@@ -111,26 +112,26 @@ namespace SchoolLogicDataExtractor.Reports.Clevr
                 foreach (StudentContact studentContact in studentContacts)
                 {
                     Contact c = studentContact.Contact;
-                    writer.Write(c.DisplayName + delimiter); // name
-                    writer.Write(c.Email + delimiter); // email
-                    writer.Write(c.HomePhone + delimiter); // home phone
-                    writer.Write("" + delimiter); // cell phone
-                    writer.Write(c.WorkPhone + delimiter); // work phone
-                    writer.Write(c.Address_Physical + delimiter); // street address
-                    writer.Write("" + delimiter); // PO box
-                    writer.Write(c.Address_Physical.City + delimiter); // city
-                    writer.Write(c.Address_Physical.PostalCode + delimiter); // postal code
-                    writer.Write(c.Addrses_Mailing + delimiter); // mailing address
-                    writer.Write("" + delimiter); // agency
+                    writer.Write(stringContainer + c.DisplayName + stringContainer + delimiter); // name
+                    writer.Write(stringContainer + c.Email + stringContainer + delimiter); // email
+                    writer.Write(stringContainer + c.HomePhone + stringContainer + delimiter); // home phone
+                    writer.Write(stringContainer + "" + stringContainer + delimiter); // cell phone
+                    writer.Write(stringContainer + c.WorkPhone + stringContainer + delimiter); // work phone
+                    writer.Write(stringContainer + c.Address_Physical + stringContainer + delimiter); // street address
+                    writer.Write(stringContainer + "" + stringContainer + delimiter); // PO box
+                    writer.Write(stringContainer + c.Address_Physical.City + stringContainer + delimiter); // city
+                    writer.Write(stringContainer + c.Address_Physical.PostalCode + stringContainer + delimiter); // postal code
+                    writer.Write(stringContainer + c.Addrses_Mailing + stringContainer + delimiter); // mailing address
+                    writer.Write(stringContainer + "" + stringContainer + delimiter); // agency
                 }                               
 
-                writer.Write(student.YearToDateAttendanceStatistics.UnexcusedAbsences + "" + delimiter);
-                writer.Write(student.YearToDateAttendanceStatistics.LatesOrLeaveEarlies + "" + delimiter);
-                writer.Write("" + delimiter); // funding level
-                writer.Write("" + delimiter); // funding category
-                writer.Write("" + delimiter); // funding renewal date
-                writer.Write(student.Medical + delimiter); // medical
-                writer.Write("" + delimiter); // aboriginalacademicachievementgrant
+                writer.Write(stringContainer + student.YearToDateAttendanceStatistics.UnexcusedAbsences + "" + stringContainer + delimiter);
+                writer.Write(stringContainer + student.YearToDateAttendanceStatistics.LatesOrLeaveEarlies + "" + stringContainer + delimiter);
+                writer.Write(stringContainer + "" + stringContainer + delimiter); // funding level
+                writer.Write(stringContainer + "" + stringContainer + delimiter); // funding category
+                writer.Write(stringContainer + "" + stringContainer + delimiter); // funding renewal date
+                writer.Write(stringContainer + student.Medical + stringContainer + delimiter); // medical
+                writer.Write(stringContainer + "" + stringContainer + delimiter); // aboriginalacademicachievementgrant
 
                 writer.Write(Environment.NewLine);
             }
