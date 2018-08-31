@@ -13,6 +13,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extract-ClevrStudentDemogra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extract-XelloStudents", "Extract-XelloStudents\Extract-XelloStudents.csproj", "{FA592A27-190A-4B63-AD20-09054917841C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extract-SanghaClasses", "Extract-SanghaClasses\Extract-SanghaClasses.csproj", "{B29F3759-D513-4830-89F0-AE0FBAE648D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extract-SanghaSections", "Extract-SanghaSections\Extract-SanghaSections.csproj", "{F69D6834-D57F-4950-8D54-E438AEA6992D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extract-SangaStaff", "Extract-SangaStaff\Extract-SangaStaff.csproj", "{A49D2B7C-CA40-4772-8A4C-0D29B153FC8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extract-SanghaStudents", "Extract-SanghaStudents\Extract-SanghaStudents.csproj", "{552C759F-85CE-4961-82E9-D068572B31DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extract-SanghaParents", "Extract-SanghaParents\Extract-SanghaParents.csproj", "{7DB62CA0-CC5C-4646-89BD-F60CB0E21B15}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extract-SanghaEnrollment", "Extract-SanghaEnrollment\Extract-SanghaEnrollment.csproj", "{6D085C8B-16A1-4712-905B-C6E08419471C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +51,30 @@ Global
 		{FA592A27-190A-4B63-AD20-09054917841C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA592A27-190A-4B63-AD20-09054917841C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA592A27-190A-4B63-AD20-09054917841C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B29F3759-D513-4830-89F0-AE0FBAE648D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B29F3759-D513-4830-89F0-AE0FBAE648D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B29F3759-D513-4830-89F0-AE0FBAE648D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B29F3759-D513-4830-89F0-AE0FBAE648D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F69D6834-D57F-4950-8D54-E438AEA6992D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F69D6834-D57F-4950-8D54-E438AEA6992D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F69D6834-D57F-4950-8D54-E438AEA6992D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F69D6834-D57F-4950-8D54-E438AEA6992D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A49D2B7C-CA40-4772-8A4C-0D29B153FC8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A49D2B7C-CA40-4772-8A4C-0D29B153FC8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A49D2B7C-CA40-4772-8A4C-0D29B153FC8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A49D2B7C-CA40-4772-8A4C-0D29B153FC8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{552C759F-85CE-4961-82E9-D068572B31DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{552C759F-85CE-4961-82E9-D068572B31DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{552C759F-85CE-4961-82E9-D068572B31DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{552C759F-85CE-4961-82E9-D068572B31DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DB62CA0-CC5C-4646-89BD-F60CB0E21B15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DB62CA0-CC5C-4646-89BD-F60CB0E21B15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DB62CA0-CC5C-4646-89BD-F60CB0E21B15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DB62CA0-CC5C-4646-89BD-F60CB0E21B15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D085C8B-16A1-4712-905B-C6E08419471C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D085C8B-16A1-4712-905B-C6E08419471C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D085C8B-16A1-4712-905B-C6E08419471C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D085C8B-16A1-4712-905B-C6E08419471C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

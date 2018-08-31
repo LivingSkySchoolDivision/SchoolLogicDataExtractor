@@ -8,7 +8,7 @@ namespace SchoolLogicDataExtractor
 {
     class StaffMember
     {
-        public int ID { get; set; }
+        public int iStaffId { get; set; }
         public School School { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

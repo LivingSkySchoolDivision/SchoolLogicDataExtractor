@@ -94,7 +94,11 @@ namespace SchoolLogicDataExtractor
                     {
                         while (dataReader.Read())
                         {
-                            _allStudents.Add(Parsers.ParseInt(dataReader["iStudentID"].ToString().Trim()), dataReaderToStudent(dataReader));
+                            Student s = dataReaderToStudent(dataReader);
+                            if (!_allStudents.ContainsKey(s.iStudentID))
+                            {
+                                _allStudents.Add(s.iStudentID, s);
+                            }
                         }
                     }
                     sqlCommand.Connection.Close();
@@ -153,6 +157,17 @@ namespace SchoolLogicDataExtractor
         public List<Student> GetAll()
         {
             return _allStudents.Values.OrderBy(x => x.LastName).ThenBy(x => x.FirstName).ToList();
+        }
+
+        public Student Get(int iStudentID)
+        {
+            if (_allStudents.ContainsKey(iStudentID))
+            {
+                return _allStudents[iStudentID];
+            } else
+            {
+                return null;
+            }
         }
     }
 }

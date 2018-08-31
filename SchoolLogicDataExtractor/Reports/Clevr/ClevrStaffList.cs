@@ -41,8 +41,8 @@ namespace SchoolLogicDataExtractor.Reports.Clevr
             foreach(StaffMember staff in allStaff.Where(s => s.IsEnabled))
             {
                 writer.Write(Settings.ClevrTennantID + "" + delimiter);
-                writer.Write(stringContainer + staff.ID + stringContainer + delimiter);
-                writer.Write(stringContainer + staff.ID + stringContainer + delimiter);
+                writer.Write(stringContainer + staff.iStaffId + stringContainer + delimiter);
+                writer.Write(stringContainer + staff.iStaffId + stringContainer + delimiter);
                 writer.Write(stringContainer + staff.School.Name + stringContainer + delimiter);
                 writer.Write(stringContainer + staff.LastName + stringContainer + delimiter);
                 writer.Write(stringContainer + staff.FirstName + stringContainer + delimiter);

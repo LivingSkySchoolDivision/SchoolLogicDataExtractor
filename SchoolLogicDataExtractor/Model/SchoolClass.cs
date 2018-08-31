@@ -4,18 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolLogicDataExtractor.Model
+namespace SchoolLogicDataExtractor
 {
     class SchoolClass
     {
         public int iClassID { get; set; }
         public string Name { get; set; }
-        public string CourseName { get; set; }
-        public string CourseCode { get; set; }
-        public string GovCourseCode { get; set; }
-        public decimal CreditValue { get; set; }
-        public string GradeLower { get; set; }
-        public string GradeUpper { get; set; }
-
+        public int iCourseID { get; set; }
+        public Course Course { get; set; }
+        public string Section { get; set; }
+        public int iSchoolID { get; set; }
+        public School School { get; set; }
+        public int EnrolledStudents { get; set; }
     }
 }

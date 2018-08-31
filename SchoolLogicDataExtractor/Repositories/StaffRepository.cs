@@ -112,10 +112,10 @@ namespace SchoolLogicDataExtractor
                             StaffMember s = dataReaderToStaffMember(dataReader);
                             if (s != null)
                             {
-                                if (!ignoredStaffIDs.Contains(s.ID))
-                                if (!_allStaff.ContainsKey(s.ID))
+                                if (!ignoredStaffIDs.Contains(s.iStaffId))
+                                if (!_allStaff.ContainsKey(s.iStaffId))
                                 {
-                                    _allStaff.Add(s.ID, s);
+                                    _allStaff.Add(s.iStaffId, s);
                                 }
                             }
                         }
@@ -129,7 +129,7 @@ namespace SchoolLogicDataExtractor
         {
             return new StaffMember()
             {
-                ID = Parsers.ParseInt(dataReader["iStaffID"].ToString().Trim()),
+                iStaffId = Parsers.ParseInt(dataReader["iStaffID"].ToString().Trim()),
                 FirstName = dataReader["cFirstName"].ToString().Trim(),
                 LastName = dataReader["cLastName"].ToString().Trim(),
                 DateOfBirth = Parsers.ParseDate(dataReader["dBirthDate"].ToString().Trim()),
@@ -143,6 +143,11 @@ namespace SchoolLogicDataExtractor
         public List<StaffMember> GetAll()
         {
             return _allStaff.Values.OrderBy(x => x.LastName).ThenBy(x => x.FirstName).ToList();
+        }
+
+        public StaffMember Get(int iStaffID)
+        {
+            return _allStaff.ContainsKey(iStaffID) ? _allStaff[iStaffID] : null;
         }
     }
 }
