@@ -28,7 +28,7 @@ namespace SchoolLogicDataExtractor.Reports.Xello
             writer.Write("DateOfBirth" + delimiter);
             writer.Write("CurrentGrade" + delimiter);
             writer.Write("CurrentSchoolCode" + delimiter);
-            writer.Write("PreRegSchoolCoode" + delimiter);
+            writer.Write("PreRegSchoolCode" + delimiter);
             writer.Write("Email" + delimiter);
             writer.Write(Environment.NewLine);
 
