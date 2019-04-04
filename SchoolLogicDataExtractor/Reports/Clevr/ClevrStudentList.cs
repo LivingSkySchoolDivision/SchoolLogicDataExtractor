@@ -45,8 +45,8 @@ namespace SchoolLogicDataExtractor.Reports.Clevr
                 writer.Write(stringContainer + student.StudentNumber + stringContainer + delimiter);
                 writer.Write(stringContainer + student.StudentNumber + stringContainer + delimiter);
                 writer.Write(stringContainer + student.BaseSchool.DAN + stringContainer + delimiter);
-                writer.Write(stringContainer + student.LastName + stringContainer + delimiter);
-                writer.Write(stringContainer + student.FirstName + stringContainer + delimiter);
+                writer.Write(stringContainer + student.LegalLastName + stringContainer + delimiter);
+                writer.Write(stringContainer + student.LegalFirstName + stringContainer + delimiter);
                 writer.Write(stringContainer + student.MiddleName + stringContainer + delimiter);
                 writer.Write(stringContainer + student.FirstName + stringContainer + delimiter);
                 writer.Write(stringContainer + student.DateOfBirth.ToShortDateString() + stringContainer + delimiter);
