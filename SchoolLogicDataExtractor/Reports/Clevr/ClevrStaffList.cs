@@ -11,7 +11,7 @@ namespace SchoolLogicDataExtractor.Reports.Clevr
     {
         private const char delimiter = '\t';
         private const string stringContainer = "\"";
-        private readonly Encoding encoding = Encoding.ASCII;
+        private readonly Encoding encoding = Encoding.UTF8;
 
         public MemoryStream GenerateCSV()
         {
