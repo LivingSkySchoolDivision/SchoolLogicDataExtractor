@@ -10,7 +10,7 @@ namespace SchoolLogicDataExtractor.Reports.Clevr
     public class ClevrStudentList
     {
         private const string delimiter = "\t";
-        private const string stringContainer = "\"";
+        private const string stringContainer = "";
         private readonly Encoding encoding = Encoding.UTF8;
 
         public MemoryStream GenerateCSV()
