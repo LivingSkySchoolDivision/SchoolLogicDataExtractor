@@ -11,12 +11,11 @@ namespace SchoolLogicDataExtractor.Reports.Xello
     {
         private const string delimiter = "|";
         private const string stringContainer = "\"";
-        private readonly Encoding encoding = Encoding.UTF8;
 
         public MemoryStream GenerateCSV()
         {
             MemoryStream outStream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(outStream, encoding);
+            StreamWriter writer = new StreamWriter(outStream);
 
             // Headings
             writer.Write("SchoolCode");

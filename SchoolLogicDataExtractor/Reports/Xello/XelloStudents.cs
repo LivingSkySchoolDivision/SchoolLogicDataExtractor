@@ -11,14 +11,13 @@ namespace SchoolLogicDataExtractor.Reports.Xello
     {
         private const string delimiter = "|";
         private const string stringContainer = "";
-        private readonly Encoding encoding = Encoding.ASCII;
 
         // https://public.careercruising.com/us/en/support/onboarding/repetitive-data-transfer-student-and-course/
         
         public MemoryStream GenerateCSV()
         {
             MemoryStream outStream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(outStream, encoding);
+            StreamWriter writer = new StreamWriter(outStream);
 
             // Headings            
             writer.Write("StudentID" + delimiter);
