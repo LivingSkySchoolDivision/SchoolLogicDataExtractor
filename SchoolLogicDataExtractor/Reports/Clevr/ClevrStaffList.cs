@@ -47,7 +47,8 @@ namespace SchoolLogicDataExtractor.Reports.Clevr
                 writer.Write(stringContainer + staff.FirstName + stringContainer + delimiter);
                 writer.Write(stringContainer + "" + stringContainer + delimiter);
                 writer.Write(stringContainer + staff.FirstName + stringContainer + delimiter);
-                writer.Write(stringContainer + staff.DateOfBirth.ToShortDateString() + stringContainer + delimiter);
+                //writer.Write(stringContainer + staff.DateOfBirth.ToShortDateString() + stringContainer + delimiter);
+                writer.Write(stringContainer + "" + stringContainer + delimiter);
                 writer.Write((staff.IsEnabled ? 1 : 0) + "" + delimiter); // status 1=active 0=inactive
                 writer.Write(stringContainer + staff.EmailAddress + stringContainer + delimiter);
                 writer.Write(stringContainer + "" + stringContainer + delimiter);
