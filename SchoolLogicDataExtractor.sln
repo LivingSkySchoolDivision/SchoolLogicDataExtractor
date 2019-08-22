@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2006
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolLogicDataExtractor", "SchoolLogicDataExtractor\SchoolLogicDataExtractor.csproj", "{D34415CD-B22A-449E-BDFA-B13A4EF4748B}"
 EndProject
@@ -24,6 +24,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extract-SanghaParents", "Extract-SanghaParents\Extract-SanghaParents.csproj", "{7DB62CA0-CC5C-4646-89BD-F60CB0E21B15}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extract-SanghaEnrollment", "Extract-SanghaEnrollment\Extract-SanghaEnrollment.csproj", "{6D085C8B-16A1-4712-905B-C6E08419471C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extract-Clever-Schools", "Extract-Clever-Schools\Extract-Clever-Schools.csproj", "{6EA568C8-D0C8-439E-998D-314E245B8ED4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{6D085C8B-16A1-4712-905B-C6E08419471C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D085C8B-16A1-4712-905B-C6E08419471C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D085C8B-16A1-4712-905B-C6E08419471C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EA568C8-D0C8-439E-998D-314E245B8ED4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EA568C8-D0C8-439E-998D-314E245B8ED4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EA568C8-D0C8-439E-998D-314E245B8ED4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EA568C8-D0C8-439E-998D-314E245B8ED4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

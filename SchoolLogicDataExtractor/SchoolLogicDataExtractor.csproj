@@ -64,6 +64,7 @@
     <Compile Include="Model\EnrolledStudent.cs" />
     <Compile Include="Model\TeacherAssignment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\Clever\CleverSchools.cs" />
     <Compile Include="Reports\Clevr\ClevrStaffList.cs" />
     <Compile Include="Reports\Clevr\ClevrStudentDemographicsList.cs" />
     <Compile Include="Reports\Clevr\ClevrStudentList.cs" />
