@@ -88,6 +88,7 @@ namespace SchoolLogicDataExtractor
                                         "Staff.lInactive, " +
                                         "Staff.lAccountLocked, " +
                                         "Staff.cLDAPName, " +
+                                        "UserStaff.UF_2085 as TeacherCertNum, " +
                                         "LookupValues.cName AS cRole " +
                                     "FROM            " +
                                         "LookupValues " +
@@ -136,7 +137,8 @@ namespace SchoolLogicDataExtractor
                 LDAPUserName = dataReader["cUserName"].ToString().Trim(),
                 Role = dataReader["cRole"].ToString().Trim(),
                 IsEnabled = !Parsers.ParseBool(dataReader["lInactive"].ToString().Trim()),
-                School = _schoolRepo.Get(Parsers.ParseInt(dataReader["iSchoolID"].ToString().Trim()))
+                School = _schoolRepo.Get(Parsers.ParseInt(dataReader["iSchoolID"].ToString().Trim())),
+                TeachingCertificateNumber = dataReader["TeacherCertNum"].ToString().Trim()
             };
         }
 

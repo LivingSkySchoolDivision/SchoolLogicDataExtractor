@@ -120,7 +120,7 @@ namespace SchoolLogicDataExtractor.Reports.Clevr
                     writer.Write(stringContainer + "" + stringContainer + delimiter); // PO box
                     writer.Write(stringContainer + c.Address_Physical.City + stringContainer + delimiter); // city
                     writer.Write(stringContainer + c.Address_Physical.PostalCode + stringContainer + delimiter); // postal code
-                    writer.Write(stringContainer + c.Addrses_Mailing + stringContainer + delimiter); // mailing address
+                    writer.Write(stringContainer + c.Address_Mailing + stringContainer + delimiter); // mailing address
                     writer.Write(stringContainer + "" + stringContainer + delimiter); // agency
                 }                               
 

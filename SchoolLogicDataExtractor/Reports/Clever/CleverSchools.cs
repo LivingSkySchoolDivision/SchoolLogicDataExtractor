@@ -18,20 +18,20 @@ namespace SchoolLogicDataExtractor.Reports.Clever
             StreamWriter writer = new StreamWriter(outStream);
 
             // Headings
-            writer.Write("School id" + delimiter);
-            writer.Write("School name" + delimiter);
-            writer.Write("School number" + delimiter);
+            writer.Write("School_id" + delimiter);
+            writer.Write("School_name" + delimiter);
+            writer.Write("School_number" + delimiter);
 
-            writer.Write("State id" + delimiter);
-            writer.Write("Low grade" + delimiter);
-            writer.Write("High grade" + delimiter);
+            writer.Write("State_id" + delimiter);
+            writer.Write("Low_grade" + delimiter);
+            writer.Write("High_grade" + delimiter);
             writer.Write("Principal" + delimiter);
-            writer.Write("Principal email" + delimiter);
-            writer.Write("School address" + delimiter);
-            writer.Write("School city" + delimiter);
-            writer.Write("School state" + delimiter);
-            writer.Write("School zip" + delimiter);
-            writer.Write("School phone" + delimiter);
+            writer.Write("Principal_email" + delimiter);
+            writer.Write("School_address" + delimiter);
+            writer.Write("School_city" + delimiter);
+            writer.Write("School_state" + delimiter);
+            writer.Write("School_zip" + delimiter);
+            writer.Write("School_phone" + delimiter);
 
             writer.Write(Environment.NewLine);
 

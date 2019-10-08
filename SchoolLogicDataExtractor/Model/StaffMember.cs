@@ -48,6 +48,8 @@ namespace SchoolLogicDataExtractor
             }
         }
 
+        public string TeachingCertificateNumber { get; set; }
+
         public override string ToString()
         {
             string returnMe = this.DisplayNameLastNameFirst + " (" + this.School.Name + ")";

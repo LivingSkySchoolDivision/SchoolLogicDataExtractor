@@ -36,7 +36,6 @@ namespace SchoolLogicDataExtractor.Helpers
             "5810221", //St. Vital Catholic School
             "5910813", //Unity Composite High School
             "5910711", //Unity Public School
-
         };
     }
 }

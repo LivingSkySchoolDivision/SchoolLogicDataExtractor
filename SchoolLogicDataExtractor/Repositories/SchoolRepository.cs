@@ -15,7 +15,7 @@ namespace SchoolLogicDataExtractor
 
         // Manually hide some of the schools, for now
         //private const string SQLQuery = "SELECT * FROM School WHERE iDistrictID=1 ORDER BY cName";
-        private const string SQLQuery = "SELECT * FROM School WHERE (cName <> 'Zinactive') AND (iDistrictID=1) ORDER BY cName";
+        private const string SQLQuery = "SELECT * FROM School WHERE (cName <> 'Zinactive') AND (lInactive=0) AND (iDistrictID=1) ORDER BY cName";
 
         public SchoolRepository()
         {

@@ -34,6 +34,7 @@ namespace SchoolLogicDataExtractor
                                   "Student.iTrackID,  " +
                                   "Student.iSchoolID AS Expr1,  " +
                                   "Student.mMedical,  " +
+                                  "Student.cGovernmentNumber, " +
                                   "Location.cPhone,  " +
                                   "Location.cApartment,  " +
                                   "Location.cHouseNo,  " +
@@ -125,6 +126,7 @@ namespace SchoolLogicDataExtractor
                 Gender = dataReader["Gender"].ToString().Trim(),
                 GenderInitial = dataReader["GenderCode"].ToString().Trim(),
                 GradeUnformatted = dataReader["Grade"].ToString().Trim(),
+                SaskLearningNumber = dataReader["cGovernmentNumber"].ToString().Trim(),
                 BaseSchool = _schoolRepo.Get(Parsers.ParseInt(dataReader["iSchoolID"].ToString().Trim())),
                 Contacts = _contactRepo.GetForStudent(Parsers.ParseInt(dataReader["iStudentID"].ToString().Trim())),
                 Address_Physical = new Address()

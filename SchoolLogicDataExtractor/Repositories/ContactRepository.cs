@@ -200,7 +200,8 @@ namespace SchoolLogicDataExtractor
                     iContactID = contactID,
                     Relation = dataReader["Relation"].ToString().Trim(),
                     LivesWithStudent = Parsers.ParseBool(dataReader["lLivesWithStudent"].ToString().Trim()),
-                    Priority = Parsers.ParseInt(dataReader["iContactPriority"].ToString().Trim())
+                    Priority = Parsers.ParseInt(dataReader["iContactPriority"].ToString().Trim()),
+                    CanAccessHomelogic = Parsers.ParseBool(dataReader["lMail"].ToString().Trim())
                 };
             }
             else
@@ -230,7 +231,7 @@ namespace SchoolLogicDataExtractor
                     PostalCode = dataReader["cPostalCode"].ToString().Trim().ToSingleLine(),
                     Country = dataReader["Country"].ToString().Trim().ToSingleLine()
                 },
-                Addrses_Mailing = _mailingAddressRepo.GetForContact(Parsers.ParseInt(dataReader["iContactID"].ToString().Trim()))
+                Address_Mailing = _mailingAddressRepo.GetForContact(Parsers.ParseInt(dataReader["iContactID"].ToString().Trim()))
             };
         }
 

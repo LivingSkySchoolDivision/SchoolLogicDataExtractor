@@ -13,7 +13,7 @@ namespace SchoolLogicDataExtractor
         public string LastName { get; set; }
         public string Email { get; set; }
         public Address Address_Physical { get; set; }
-        public Address Addrses_Mailing { get; set; }
+        public Address Address_Mailing { get; set; }
         public string HomePhone { get; set; }
         public string WorkPhone { get; set; }
         public string CellPhone { get; set; }
@@ -36,7 +36,7 @@ namespace SchoolLogicDataExtractor
         public Contact()
         {
             this.Address_Physical = new Address();
-            this.Addrses_Mailing = new Address();
+            this.Address_Mailing = new Address();
         }
 
         public override string ToString()

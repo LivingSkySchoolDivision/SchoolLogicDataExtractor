@@ -81,6 +81,7 @@ namespace SchoolLogicDataExtractor
         public string CellPhone { get; set; }
         public string HomePhone { get; set; }
         public string Medical { get; set; }
+        public string SaskLearningNumber { get; set; }
         public string DisplayName
         {
             get

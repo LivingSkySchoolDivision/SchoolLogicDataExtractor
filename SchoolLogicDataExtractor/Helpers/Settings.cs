@@ -29,8 +29,7 @@ namespace SchoolLogicDataExtractor
         }
 
         public static readonly string configFileName = "Config.xml";
-
-
+        
         private static string LoadConnectionString()
         {
             string returnMe = string.Empty;
