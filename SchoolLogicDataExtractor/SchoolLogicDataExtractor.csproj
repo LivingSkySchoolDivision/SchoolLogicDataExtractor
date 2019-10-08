@@ -59,9 +59,9 @@
     <Compile Include="Model\StudentAbsenceStatistics.cs" />
     <Compile Include="Model\StudentClassEnrolment.cs" />
     <Compile Include="Model\StudentContact.cs" />
-    <Compile Include="Model\StudentCredit.cs" />
     <Compile Include="Model\StudentEnrolledClass.cs" />
     <Compile Include="Model\EnrolledStudent.cs" />
+    <Compile Include="Model\StudentHistoryMark.cs" />
     <Compile Include="Model\TeacherAssignment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports\Clever\CleverEnrollments.cs" />
@@ -91,6 +91,7 @@
     <Compile Include="Repositories\StaffRepository.cs" />
     <Compile Include="Repositories\EnrolledStudentRepository.cs" />
     <Compile Include="Repositories\StudentClassEnrolmentRepository.cs" />
+    <Compile Include="Repositories\StudentHistoryMarkRepository.cs" />
     <Compile Include="Repositories\StudentRepository.cs" />
     <Compile Include="Repositories\TeacherAssignmentRepository.cs" />
   </ItemGroup>

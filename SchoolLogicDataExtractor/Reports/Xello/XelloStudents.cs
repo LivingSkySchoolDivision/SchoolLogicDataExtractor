@@ -11,6 +11,7 @@ namespace SchoolLogicDataExtractor.Reports.Xello
     {
         private const string delimiter = "|";
         private const string stringContainer = "";
+        private readonly List<string> gradeList = new List<string>() { "12", "11", "10", "9", "8", "7", "09", "08", "07" };
 
         // https://public.careercruising.com/us/en/support/onboarding/repetitive-data-transfer-student-and-course/
         
@@ -33,7 +34,7 @@ namespace SchoolLogicDataExtractor.Reports.Xello
 
             StudentRepository _studentRepo = new StudentRepository();
 
-            foreach (Student student in _studentRepo.GetAll().OrderBy(s => s.BaseSchool.Name).ThenBy(s => s.DisplayNameLastNameFirst))
+            foreach (Student student in _studentRepo.GetAll().Where(s => gradeList.Contains(s.Grade)).OrderBy(s => s.BaseSchool.Name).ThenBy(s => s.DisplayNameLastNameFirst))
             {
                 writer.Write(stringContainer + student.StudentNumber + stringContainer + delimiter);
                 writer.Write(stringContainer + student.FirstName + stringContainer + delimiter);
