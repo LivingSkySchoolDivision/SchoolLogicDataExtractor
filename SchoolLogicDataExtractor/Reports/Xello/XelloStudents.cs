@@ -43,7 +43,7 @@ namespace SchoolLogicDataExtractor.Reports.Xello
                 writer.Write(stringContainer + student.Grade + stringContainer + delimiter);
                 writer.Write(stringContainer + student.BaseSchool.DAN + stringContainer + delimiter);
                 writer.Write(stringContainer + "" + stringContainer + delimiter);  
-                writer.Write(stringContainer + student.EmailAddress + stringContainer + delimiter);
+                writer.Write(stringContainer + student.EmailAddress + stringContainer);
                 writer.Write(Environment.NewLine);
             }
 

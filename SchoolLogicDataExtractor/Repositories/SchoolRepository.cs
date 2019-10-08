@@ -15,7 +15,7 @@ namespace SchoolLogicDataExtractor
 
         // Manually hide some of the schools, for now
         //private const string SQLQuery = "SELECT * FROM School WHERE iDistrictID=1 ORDER BY cName";
-        private const string SQLQuery = "SELECT * FROM School WHERE (cName <> 'Zinactive') AND (lInactive=0) AND (iDistrictID=1) ORDER BY cName";
+        private const string SQLQuery = "SELECT School.*, LowGrade.cName as LowGrade, HighGrade.cName as HighGrade FROM School LEFT OUTER JOIN Grades as LowGrade ON School.iLow_GradesID=LowGrade.iGradesID LEFT OUTER JOIN Grades as HighGrade ON School.iHigh_GradesID=HighGrade.iGradesID WHERE (School.cName <> 'Zinactive') AND (lInactive=0) AND (iDistrictID=1)   ORDER BY cName";
 
         public SchoolRepository()
         {
@@ -62,7 +62,9 @@ namespace SchoolLogicDataExtractor
                 Name = dataReader["cName"].ToString().Trim(),
                 iSchoolID = iSchoolID,
                 GovernmentID = dataReader["cCode"].ToString().Trim(),
-                isFake = false
+                isFake = false,
+                LowGrade = dataReader["LowGrade"].ToString().Trim(),
+                HighGrade = dataReader["HighGrade"].ToString().Trim()
             };
         }
 

@@ -78,9 +78,9 @@
     <Compile Include="Reports\Sangha\SanghaSections.cs" />
     <Compile Include="Reports\Sangha\SanghaStaff.cs" />
     <Compile Include="Reports\Sangha\SanghaStudents.cs" />
-    <Compile Include="Reports\Xello\XelloCourses.cs" />
+    <Compile Include="Reports\Xello\XelloCourseCodes.cs" />
     <Compile Include="Reports\Xello\XelloSchools.cs" />
-    <Compile Include="Reports\Xello\XelloStudentExistingCredits.cs" />
+    <Compile Include="Reports\Xello\XelloStudentCourses.cs" />
     <Compile Include="Reports\Xello\XelloStudents.cs" />
     <Compile Include="Repositories\AbsenceStatisticsRepository.cs" />
     <Compile Include="Repositories\ContactRepository.cs" />

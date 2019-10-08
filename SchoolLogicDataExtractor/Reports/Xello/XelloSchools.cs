@@ -27,8 +27,8 @@ namespace SchoolLogicDataExtractor.Reports.Xello
 
             foreach (School school in _schoolRepo.GetAll())
             {
-                writer.Write(stringContainer + school.DAN + stringContainer);
-                writer.Write(stringContainer + school.Name + stringContainer);
+                writer.Write(stringContainer + school.DAN + stringContainer + delimiter);
+                writer.Write(stringContainer + school.Name + stringContainer + delimiter);
                 writer.Write(stringContainer + "" +stringContainer);
                 writer.Write(Environment.NewLine);
             }

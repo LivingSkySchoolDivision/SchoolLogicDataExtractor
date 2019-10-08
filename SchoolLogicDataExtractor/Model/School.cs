@@ -12,8 +12,16 @@ namespace SchoolLogicDataExtractor
         public string DAN { get { return this.GovernmentID; } }
         public string Name { get; set; }
         public string GovernmentID { get; set; }
-
-
         public bool isFake { get; set; }
+        public string LowGrade { get; set; }
+        public string HighGrade { get; set; }
+        
+        public bool IsHighSchool 
+        { 
+            get
+            {
+                return this.HighGrade == "12";
+            }
+        }
     }
 }

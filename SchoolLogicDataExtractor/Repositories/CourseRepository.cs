@@ -36,7 +36,12 @@ namespace SchoolLogicDataExtractor
             {
                 iCourseID = Parsers.ParseInt(dataReader["iCourseID"].ToString().Trim()),
                 CourseCode = dataReader["cGovernmentCode"].ToString().Trim(),
-                Name = dataReader["cName"].ToString().Trim()
+                Name = dataReader["cName"].ToString().Trim(),
+                HighGrade = dataReader["HighGrade"].ToString().Trim(),
+                LowGrade = dataReader["LowGrade"].ToString().Trim(),
+                HighCredit = Parsers.ParseDecimal(dataReader["nHighCredit"].ToString().Trim()),
+                LowCredit = Parsers.ParseDecimal(dataReader["nLowCredit"].ToString().Trim()),
+                CurrentlyOffered = Parsers.ParseBool(dataReader["lOfferedInSchool"].ToString().Trim())
             };
         }
 
