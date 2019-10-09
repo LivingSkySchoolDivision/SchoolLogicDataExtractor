@@ -29,7 +29,7 @@ namespace SchoolLogicDataExtractor.Reports.Xello
             writer.Write("CurrentGrade" + delimiter);
             writer.Write("CurrentSchoolCode" + delimiter);
             writer.Write("PreRegSchoolCode" + delimiter);
-            writer.Write("Email" + delimiter);
+            writer.Write("Email");
             writer.Write(Environment.NewLine);
 
             StudentRepository _studentRepo = new StudentRepository();

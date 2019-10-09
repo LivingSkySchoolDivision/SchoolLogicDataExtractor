@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace SchoolLogicDataExtractor.Reports.Xello
 {
-    class XelloSchools
+    public class XelloSchools
     {
         private const string delimiter = "|";
-        private const string stringContainer = "\"";
+        private const string stringContainer = "";
 
         public MemoryStream GenerateCSV()
         {
@@ -18,8 +18,8 @@ namespace SchoolLogicDataExtractor.Reports.Xello
             StreamWriter writer = new StreamWriter(outStream);
 
             // Headings
-            writer.Write("SchoolCode");
-            writer.Write("Name");
+            writer.Write("SchoolCode" + delimiter);
+            writer.Write("Name" + delimiter);
             writer.Write("SchoolType");
             writer.Write(Environment.NewLine);
 
@@ -29,7 +29,7 @@ namespace SchoolLogicDataExtractor.Reports.Xello
             {
                 writer.Write(stringContainer + school.DAN + stringContainer + delimiter);
                 writer.Write(stringContainer + school.Name + stringContainer + delimiter);
-                writer.Write(stringContainer + "" +stringContainer);
+                writer.Write(stringContainer + (school.IsHighSchool ? 1 : 2) + stringContainer);
                 writer.Write(Environment.NewLine);
             }
 
