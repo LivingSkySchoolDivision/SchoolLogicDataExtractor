@@ -11,7 +11,7 @@ namespace SchoolLogicDataExtractor.Reports.Xello
     {
         private const string delimiter = "|";
         private const string stringContainer = "";
-        private readonly List<string> gradeList = new List<string>() { "12", "11", "10", "9", "8", "7", "09", "08", "07" };
+        private readonly List<string> gradeList = new List<string>() { "12", "11", "10", "9", "8", "7", "09", "08", "07", "6", "06", "5", "05" };
 
         // https://public.careercruising.com/us/en/support/onboarding/repetitive-data-transfer-student-and-course/
         
