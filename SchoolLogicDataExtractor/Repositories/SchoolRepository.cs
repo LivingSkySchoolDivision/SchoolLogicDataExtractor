@@ -15,7 +15,7 @@ namespace SchoolLogicDataExtractor
 
         // Manually hide some of the schools, for now
         //private const string SQLQuery = "SELECT * FROM School WHERE iDistrictID=1 ORDER BY cName";
-        private const string SQLQuery = "SELECT School.*, LowGrade.cName as LowGrade, HighGrade.cName as HighGrade FROM School LEFT OUTER JOIN Grades as LowGrade ON School.iLow_GradesID=LowGrade.iGradesID LEFT OUTER JOIN Grades as HighGrade ON School.iHigh_GradesID=HighGrade.iGradesID WHERE (School.cName <> 'Zinactive') AND (lInactive=0) AND (iDistrictID=1)   ORDER BY cName";
+        private const string SQLQuery = "SELECT School.*, LowGrade.cName as LowGrade, HighGrade.cName as HighGrade, RegionLV.cCode as RegionCode FROM School LEFT OUTER JOIN Grades as LowGrade ON School.iLow_GradesID=LowGrade.iGradesID LEFT OUTER JOIN Grades as HighGrade ON School.iHigh_GradesID=HighGrade.iGradesID LEFT OUTER JOIN LookupValues as RegionLV ON School.iLV_RegionID=RegionLV.iLookupValuesID WHERE (School.cName <> 'Zinactive') AND (School.lInactive=0) AND (iDistrictID=1)   ORDER BY cName";
 
         public SchoolRepository()
         {
@@ -64,7 +64,9 @@ namespace SchoolLogicDataExtractor
                 GovernmentID = dataReader["cCode"].ToString().Trim(),
                 isFake = false,
                 LowGrade = dataReader["LowGrade"].ToString().Trim(),
-                HighGrade = dataReader["HighGrade"].ToString().Trim()
+                HighGrade = dataReader["HighGrade"].ToString().Trim(),
+                Address = dataReader["mAddress"].ToString().Trim(),
+                Region = dataReader["RegionCode"].ToString().Trim()
             };
         }
 

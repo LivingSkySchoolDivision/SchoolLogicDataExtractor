@@ -15,6 +15,13 @@ namespace SchoolLogicDataExtractor
         public bool isFake { get; set; }
         public string LowGrade { get; set; }
         public string HighGrade { get; set; }
+
+        public string Address { get; set; }
+
+        /// <summary>
+        /// Province/State
+        /// </summary>
+        public string Region { get; set; }
         
         public bool IsHighSchool 
         { 

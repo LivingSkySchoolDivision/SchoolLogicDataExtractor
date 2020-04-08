@@ -44,16 +44,50 @@ namespace SchoolLogicDataExtractor.Reports.Clever
                 writer.Write(stringContainer + school.Name + stringContainer + delimiter);
                 writer.Write(stringContainer + school.DAN + stringContainer + delimiter);
 
-                writer.Write(stringContainer + "" + stringContainer + delimiter);
-                writer.Write(stringContainer + "" + stringContainer + delimiter);
-                writer.Write(stringContainer + "" + stringContainer + delimiter);
-                writer.Write(stringContainer + "" + stringContainer + delimiter);
-                writer.Write(stringContainer + "" + stringContainer + delimiter);
-                writer.Write(stringContainer + "" + stringContainer + delimiter);
-                writer.Write(stringContainer + "" + stringContainer + delimiter);
-                writer.Write(stringContainer + "" + stringContainer + delimiter);
-                writer.Write(stringContainer + "" + stringContainer + delimiter);
-                writer.Write(stringContainer + "" + stringContainer + delimiter);
+                writer.Write(stringContainer + "" + stringContainer + delimiter); // State ID
+
+                // Parse K and PreK into what Clever expects
+                string lowGrade = school.LowGrade;
+                if (lowGrade.ToLower() == "pk")
+                {
+                    lowGrade = "PreKindergarten";
+                }
+
+                if ((lowGrade.ToLower() == "0k") || (lowGrade.ToLower() == "k"))
+                {
+                    lowGrade = "Kindergarten";
+                }
+
+                if (string.IsNullOrEmpty(lowGrade))
+                {
+                    lowGrade = "Ungraded";
+                }
+
+                string highGrade = school.HighGrade;
+                if (highGrade.ToLower() == "pk")
+                {
+                    highGrade = "PreKindergarten";
+                }
+
+                if ((highGrade.ToLower() == "0k") || (highGrade.ToLower() == "k"))
+                {
+                    highGrade = "Kindergarten";
+                }
+
+                if (string.IsNullOrEmpty(highGrade))
+                {
+                    highGrade = "Ungraded";
+                }
+
+                writer.Write(stringContainer + lowGrade + stringContainer + delimiter); // Low grade
+                writer.Write(stringContainer + highGrade + stringContainer + delimiter); // High greade
+                writer.Write(stringContainer + "" + stringContainer + delimiter); // Principal
+                writer.Write(stringContainer + "" + stringContainer + delimiter); // Principal email
+                writer.Write(stringContainer + "" + stringContainer + delimiter); // School address
+                writer.Write(stringContainer + "" + stringContainer + delimiter); // School city
+                writer.Write(stringContainer + school.Region + stringContainer + delimiter); // School state
+                writer.Write(stringContainer + "" + stringContainer + delimiter); // School ZIP
+                writer.Write(stringContainer + "" + stringContainer + delimiter); // School phone
 
                 writer.Write(Environment.NewLine);
             }
