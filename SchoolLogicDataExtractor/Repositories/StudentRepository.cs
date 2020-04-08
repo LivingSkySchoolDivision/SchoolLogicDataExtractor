@@ -34,6 +34,7 @@ namespace SchoolLogicDataExtractor
                                   "Student.iTrackID,  " +
                                   "Student.iSchoolID AS Expr1,  " +
                                   "Student.mMedical,  " +
+                                  "Student.mEmail,  " +
                                   "Student.cGovernmentNumber, " +
                                   "Location.cPhone,  " +
                                   "Location.cApartment,  " +
@@ -151,7 +152,8 @@ namespace SchoolLogicDataExtractor
                 YearToDateAttendanceStatistics = _absenceRepo.Get(Parsers.ParseInt(dataReader["iStudentID"].ToString().Trim())),
                 CellPhone = dataReader["mCellPhone"].ToString().Trim(),
                 HomePhone = dataReader["cPhone"].ToString().Trim(),
-                Address_Mailing = _mailingAddressRepo.GetForStudent(Parsers.ParseInt(dataReader["iStudentID"].ToString().Trim()))
+                Address_Mailing = _mailingAddressRepo.GetForStudent(Parsers.ParseInt(dataReader["iStudentID"].ToString().Trim())),
+                EmailAddress = dataReader["mEmail"].ToString().Trim()
 
             };
         }

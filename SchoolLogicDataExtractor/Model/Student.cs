@@ -20,20 +20,7 @@ namespace SchoolLogicDataExtractor
 
         public DateTime DateOfBirth { get; set; }
         public bool isCurrentlyEnrolled { get; set; }
-        public string EmailAddress
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(this.LDAPUserName))
-                {
-                    return string.Empty;
-                }
-                else
-                {
-                    return this.LDAPUserName + Settings.EmailDomain;
-                }
-            }
-        }
+        public string EmailAddress { get; set; }
         public string LDAPUserName { get; set; }
         public string Role { get { return "Student"; } }
         public string Gender { get; set; }
