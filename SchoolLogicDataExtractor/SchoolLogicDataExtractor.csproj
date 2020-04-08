@@ -67,6 +67,7 @@
     <Compile Include="Reports\Clever\CleverEnrollments.cs" />
     <Compile Include="Reports\Clever\CleverSchools.cs" />
     <Compile Include="Reports\Clever\CleverSections.cs" />
+    <Compile Include="Reports\Clever\CleverStaff.cs" />
     <Compile Include="Reports\Clever\CleverStudents.cs" />
     <Compile Include="Reports\Clever\CleverTeachers.cs" />
     <Compile Include="Reports\Clevr\ClevrStaffList.cs" />

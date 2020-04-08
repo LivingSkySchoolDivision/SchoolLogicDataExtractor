@@ -103,5 +103,17 @@ namespace SchoolLogicDataExtractor
             return _enrolmentsByClassID.ContainsKey(iClassID) ? _enrolmentsByClassID[iClassID] : new List<StudentClassEnrolment>();
         }
 
+        public Dictionary<int, int> GetEnrolmentCountsByClassID()
+        {
+            Dictionary<int, int> returnMe = new Dictionary<int, int>();
+
+            foreach(int classID in _enrolmentsByClassID.Keys)
+            {
+                returnMe.Add(classID, _enrolmentsByClassID[classID].Count);
+            }
+
+            return returnMe;
+        }
+
     }
 }

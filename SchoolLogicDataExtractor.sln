@@ -41,6 +41,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extract-XelloStudentCourses
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extract-XelloSchools", "Extract-XelloSchools\Extract-XelloSchools.csproj", "{99184967-C6FC-4377-ACF6-19C0D0E1D5F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extract-Clever-Staff", "Extract-Clever-Staff\Extract-Clever-Staff.csproj", "{045F2451-3200-4662-B8AF-DDC127F5DFE0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +125,10 @@ Global
 		{99184967-C6FC-4377-ACF6-19C0D0E1D5F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99184967-C6FC-4377-ACF6-19C0D0E1D5F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99184967-C6FC-4377-ACF6-19C0D0E1D5F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{045F2451-3200-4662-B8AF-DDC127F5DFE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{045F2451-3200-4662-B8AF-DDC127F5DFE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{045F2451-3200-4662-B8AF-DDC127F5DFE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{045F2451-3200-4662-B8AF-DDC127F5DFE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

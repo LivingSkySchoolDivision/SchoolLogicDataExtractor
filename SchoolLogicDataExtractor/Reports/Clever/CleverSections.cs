@@ -12,6 +12,8 @@ namespace SchoolLogicDataExtractor.Reports.Clever
         private const char delimiter = ',';
         private const string stringContainer = "\"";
 
+        // Don't send them empty classes
+
         public MemoryStream GenerateCSV()
         {
             MemoryStream outStream = new MemoryStream();
@@ -51,7 +53,12 @@ namespace SchoolLogicDataExtractor.Reports.Clever
             List<TeacherAssignment> allTeachingAssignments = teacherAssignmentRepo.GetAll();
 
             // Sort teacher assignments into a dictionary for easier consumption
+            // Only send up classes that have teachers assigned
             Dictionary<int, List<TeacherAssignment>> assignmentsByClassID = new Dictionary<int, List<TeacherAssignment>>();
+
+            // Don't send empty classes, so get enrolment counts for each class
+            StudentClassEnrolmentRepository enrolmentRepo = new StudentClassEnrolmentRepository();
+            Dictionary<int, int> enrolmentCountsByClassID = enrolmentRepo.GetEnrolmentCountsByClassID();
 
             foreach (TeacherAssignment ta in allTeachingAssignments)
             {
@@ -70,37 +77,43 @@ namespace SchoolLogicDataExtractor.Reports.Clever
 
             foreach (SchoolClass sc in sections)
             {
-                if (assignmentsByClassID.ContainsKey(sc.iClassID))
-                {
-                    List<TeacherAssignment> thisClassAssignments = assignmentsByClassID[sc.iClassID];
-                    if (thisClassAssignments.Count > 0)
+                if (enrolmentCountsByClassID.ContainsKey(sc.iClassID)) 
+                { 
+                    if (enrolmentCountsByClassID[sc.iClassID] > 0)
                     {
-                        writer.Write(stringContainer + sc.School.DAN + stringContainer + delimiter); // School id
-                        writer.Write(stringContainer + sc.iClassID + stringContainer + delimiter); // Section id
-                        writer.Write(stringContainer + (thisClassAssignments.Count >= 1 ? thisClassAssignments[0].Teacher.TeachingCertificateNumber.ToString() : string.Empty) + stringContainer + delimiter); // Teacher 1
-                        writer.Write(stringContainer + (thisClassAssignments.Count >= 2 ? thisClassAssignments[1].Teacher.TeachingCertificateNumber.ToString() : string.Empty) + stringContainer + delimiter); // Teacher 2
-                        writer.Write(stringContainer + (thisClassAssignments.Count >= 3 ? thisClassAssignments[2].Teacher.TeachingCertificateNumber.ToString() : string.Empty) + stringContainer + delimiter); // Teacher 3
-                        writer.Write(stringContainer + (thisClassAssignments.Count >= 4 ? thisClassAssignments[3].Teacher.TeachingCertificateNumber.ToString() : string.Empty) + stringContainer + delimiter); // Teacher 4
-                        writer.Write(stringContainer + (thisClassAssignments.Count >= 5 ? thisClassAssignments[4].Teacher.TeachingCertificateNumber.ToString() : string.Empty) + stringContainer + delimiter); // Teacher 5
-                        writer.Write(stringContainer + (thisClassAssignments.Count >= 6 ? thisClassAssignments[5].Teacher.TeachingCertificateNumber.ToString() : string.Empty) + stringContainer + delimiter); // Teacher 6 
-                        writer.Write(stringContainer + (thisClassAssignments.Count >= 7 ? thisClassAssignments[6].Teacher.TeachingCertificateNumber.ToString() : string.Empty) + stringContainer + delimiter); // Teacher 7
-                        writer.Write(stringContainer + (thisClassAssignments.Count >= 8 ? thisClassAssignments[7].Teacher.TeachingCertificateNumber.ToString() : string.Empty) + stringContainer + delimiter); // Teacher 8
-                        writer.Write(stringContainer + (thisClassAssignments.Count >= 9 ? thisClassAssignments[8].Teacher.TeachingCertificateNumber.ToString() : string.Empty) + stringContainer + delimiter); // Teacher 9
-                        writer.Write(stringContainer + (thisClassAssignments.Count >= 10 ? thisClassAssignments[9].Teacher.TeachingCertificateNumber.ToString() : string.Empty) + stringContainer + delimiter); // Teacher 10
-                        writer.Write(stringContainer + sc.Name + stringContainer + delimiter); // Name
-                        writer.Write(stringContainer + sc.Section + stringContainer + delimiter); // Section number
-                        writer.Write(stringContainer + "" + stringContainer + delimiter); // Grade
-                        writer.Write(stringContainer + sc.Course.Name + stringContainer + delimiter); // Course Name
-                        writer.Write(stringContainer + sc.Course.CourseCode + stringContainer + delimiter); // Course Number
-                        writer.Write(stringContainer + "" + stringContainer + delimiter); // Course Description
-                        writer.Write(stringContainer + "" + stringContainer + delimiter); // Period
-                        writer.Write(stringContainer + "" + stringContainer + delimiter); // Subject
-                        writer.Write(stringContainer + "" + stringContainer + delimiter); // Term name
-                        writer.Write(stringContainer + "" + stringContainer + delimiter); // Term start
-                        writer.Write(stringContainer + "" + stringContainer + delimiter); // Term end
-                        writer.Write(Environment.NewLine);
+                        if (assignmentsByClassID.ContainsKey(sc.iClassID))
+                        {
+                            List<TeacherAssignment> thisClassAssignments = assignmentsByClassID[sc.iClassID];
+                            if (thisClassAssignments.Count > 0)
+                            {
+                                writer.Write(stringContainer + sc.School.DAN + stringContainer + delimiter); // School id
+                                writer.Write(stringContainer + sc.iClassID + stringContainer + delimiter); // Section id
+                                writer.Write(stringContainer + (thisClassAssignments.Count >= 1 ? thisClassAssignments[0].Teacher.TeachingCertificateNumber.ToString() : string.Empty) + stringContainer + delimiter); // Teacher 1
+                                writer.Write(stringContainer + (thisClassAssignments.Count >= 2 ? thisClassAssignments[1].Teacher.TeachingCertificateNumber.ToString() : string.Empty) + stringContainer + delimiter); // Teacher 2
+                                writer.Write(stringContainer + (thisClassAssignments.Count >= 3 ? thisClassAssignments[2].Teacher.TeachingCertificateNumber.ToString() : string.Empty) + stringContainer + delimiter); // Teacher 3
+                                writer.Write(stringContainer + (thisClassAssignments.Count >= 4 ? thisClassAssignments[3].Teacher.TeachingCertificateNumber.ToString() : string.Empty) + stringContainer + delimiter); // Teacher 4
+                                writer.Write(stringContainer + (thisClassAssignments.Count >= 5 ? thisClassAssignments[4].Teacher.TeachingCertificateNumber.ToString() : string.Empty) + stringContainer + delimiter); // Teacher 5
+                                writer.Write(stringContainer + (thisClassAssignments.Count >= 6 ? thisClassAssignments[5].Teacher.TeachingCertificateNumber.ToString() : string.Empty) + stringContainer + delimiter); // Teacher 6 
+                                writer.Write(stringContainer + (thisClassAssignments.Count >= 7 ? thisClassAssignments[6].Teacher.TeachingCertificateNumber.ToString() : string.Empty) + stringContainer + delimiter); // Teacher 7
+                                writer.Write(stringContainer + (thisClassAssignments.Count >= 8 ? thisClassAssignments[7].Teacher.TeachingCertificateNumber.ToString() : string.Empty) + stringContainer + delimiter); // Teacher 8
+                                writer.Write(stringContainer + (thisClassAssignments.Count >= 9 ? thisClassAssignments[8].Teacher.TeachingCertificateNumber.ToString() : string.Empty) + stringContainer + delimiter); // Teacher 9
+                                writer.Write(stringContainer + (thisClassAssignments.Count >= 10 ? thisClassAssignments[9].Teacher.TeachingCertificateNumber.ToString() : string.Empty) + stringContainer + delimiter); // Teacher 10
+                                writer.Write(stringContainer + sc.Name + stringContainer + delimiter); // Name
+                                writer.Write(stringContainer + sc.Section + stringContainer + delimiter); // Section number
+                                writer.Write(stringContainer + "" + stringContainer + delimiter); // Grade
+                                writer.Write(stringContainer + sc.Course.Name + stringContainer + delimiter); // Course Name
+                                writer.Write(stringContainer + sc.Course.CourseCode + stringContainer + delimiter); // Course Number
+                                writer.Write(stringContainer + "" + stringContainer + delimiter); // Course Description
+                                writer.Write(stringContainer + "" + stringContainer + delimiter); // Period
+                                writer.Write(stringContainer + "" + stringContainer + delimiter); // Subject
+                                writer.Write(stringContainer + "" + stringContainer + delimiter); // Term name
+                                writer.Write(stringContainer + "" + stringContainer + delimiter); // Term start
+                                writer.Write(stringContainer + "" + stringContainer + delimiter); // Term end
+                                writer.Write(Environment.NewLine);
+                            }
+                        }
                     }
-                }
+                }                
             }            
 
             writer.Flush();

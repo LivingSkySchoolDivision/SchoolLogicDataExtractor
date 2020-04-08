@@ -7,28 +7,27 @@ using System.Threading.Tasks;
 
 namespace SchoolLogicDataExtractor.Reports.Clever
 {
-    public class CleverTeachers
+    public class CleverStaff
     {
         private const char delimiter = ',';
         private const string stringContainer = "\"";
 
         // Teachers and Staff are different things to Clever
         // Make the teacher list by first making a section  list
+        // Make the staff list by first making the teacher list, and including everybody else
 
-        public MemoryStream GenerateCSV()
+        public MemoryStream GenerateCSVFile()
         {
             MemoryStream outStream = new MemoryStream();
             StreamWriter writer = new StreamWriter(outStream);
 
             // Headings
             writer.Write("School_id" + delimiter);
-            writer.Write("Teacher_id" + delimiter);
-            writer.Write("Teacher_number" + delimiter);
-            writer.Write("State_teacher_id" + delimiter);
-            writer.Write("Teacher_email" + delimiter);
+            writer.Write("Staff_id" + delimiter);
+            writer.Write("Staff_email" + delimiter);
             writer.Write("First_name" + delimiter);
-            writer.Write("Middle_name" + delimiter);
             writer.Write("Last_name" + delimiter);
+            writer.Write("Department" + delimiter);
             writer.Write("Title" + delimiter);
             writer.Write("Username" + delimiter);
             writer.Write("Password" + delimiter);
@@ -36,7 +35,7 @@ namespace SchoolLogicDataExtractor.Reports.Clever
             writer.Write(Environment.NewLine);
 
             StaffRepository _staffRepo = new StaffRepository();
-            List<StaffMember> staff = _staffRepo.GetAll();
+            List<StaffMember> allStaff = _staffRepo.GetAll();
             List<string> seenTeacherCertNumbers = new List<string>();
 
             // Get all sections
@@ -69,9 +68,9 @@ namespace SchoolLogicDataExtractor.Reports.Clever
             // Now make a list of teachers we need
             Dictionary<int, StaffMember> activeTeachers = new Dictionary<int, StaffMember>();
 
-            foreach(int classID in assignmentsByClassID.Keys)
+            foreach (int classID in assignmentsByClassID.Keys)
             {
-                foreach(TeacherAssignment ta in assignmentsByClassID[classID])
+                foreach (TeacherAssignment ta in assignmentsByClassID[classID])
                 {
                     if (ta.Teacher != null)
                     {
@@ -83,25 +82,39 @@ namespace SchoolLogicDataExtractor.Reports.Clever
                 }
             }
 
-            // Now make the CSV
-            foreach (StaffMember teacher in activeTeachers.Values)
+            // Now find all the teachers who aren't on the above list
+            List<StaffMember> activeStaffWithoutClasses = new List<StaffMember>();
+            foreach (StaffMember teacher in allStaff)
             {
-                if ((teacher.School.DAN != "0") && (teacher.School.DAN.Length > 1) && (!string.IsNullOrEmpty(teacher.TeachingCertificateNumber) && (!seenTeacherCertNumbers.Contains(teacher.TeachingCertificateNumber))))
+                if ((!activeTeachers.ContainsKey(teacher.iStaffId)) && teacher.IsEnabled)
                 {
-                    seenTeacherCertNumbers.Add(teacher.TeachingCertificateNumber);
-                    writer.Write(stringContainer + teacher.School.DAN + stringContainer + delimiter); // School id
-                    writer.Write(stringContainer + teacher.TeachingCertificateNumber + stringContainer + delimiter); // Teacher id
-                    writer.Write(stringContainer + teacher.TeachingCertificateNumber + stringContainer + delimiter); // Teacher number
-                    writer.Write(stringContainer + "" + stringContainer + delimiter); // State teacher id
-                    writer.Write(stringContainer + teacher.EmailAddress + stringContainer + delimiter); // teacher email
-                    writer.Write(stringContainer + teacher.FirstName + stringContainer + delimiter); // firstname
-                    writer.Write(stringContainer + "" + stringContainer + delimiter); // middlename
-                    writer.Write(stringContainer + teacher.LastName + stringContainer + delimiter); // lastname
+                    activeStaffWithoutClasses.Add(teacher);
+                }
+            }
+
+                // Now make the CSV
+            foreach (StaffMember staff in activeStaffWithoutClasses)
+            {
+                if (!string.IsNullOrEmpty(staff.EmailAddress))
+                {
+                    string schoolID = staff.School.DAN;
+                    if (staff.School.isFake)
+                    {
+                        schoolID = "DEFAULT_DISTRICT_OFFICE";
+                    }
+
+                    writer.Write(stringContainer + schoolID + stringContainer + delimiter); // School id
+                    writer.Write(stringContainer + staff.EmailAddress + stringContainer + delimiter); // Staff id
+                    writer.Write(stringContainer + staff.EmailAddress + stringContainer + delimiter); // staff email
+                    writer.Write(stringContainer + staff.FirstName + stringContainer + delimiter); // firstname
+                    writer.Write(stringContainer + staff.LastName + stringContainer + delimiter); // lastname
+                    writer.Write(stringContainer + "" + stringContainer + delimiter); // department
                     writer.Write(stringContainer + "" + stringContainer + delimiter); // title
-                    writer.Write(stringContainer + teacher.EmailAddress + stringContainer + delimiter); // username
+                    writer.Write(stringContainer + staff.EmailAddress + stringContainer + delimiter); // username
                     writer.Write(stringContainer + "" + stringContainer + delimiter); // password
                     writer.Write(Environment.NewLine);
                 }
+
             }
 
             writer.Flush();

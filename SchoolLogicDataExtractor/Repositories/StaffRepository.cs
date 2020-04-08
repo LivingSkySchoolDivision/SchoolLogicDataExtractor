@@ -28,6 +28,7 @@ namespace SchoolLogicDataExtractor
             1827, // Subsec - leo
             1834, // Subsec - luse
             1829, // Subsec - mack
+            1974, // Subsec - mack 2
             1843, // Subsec - may
             1826, // Subsec - mck
             1859, // Subsec - mcl 
@@ -38,6 +39,7 @@ namespace SchoolLogicDataExtractor
             1819, // Subsec - stv
             1860, // Subsec - uchs
             1825, // Subsec - ups
+            1900, // SubSSO - NBCHS
             1779, // egov
             1780, // egov
             1781, // egov
