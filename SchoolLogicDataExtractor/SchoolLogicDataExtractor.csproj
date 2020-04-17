@@ -59,7 +59,6 @@
     <Compile Include="Model\StudentAbsenceStatistics.cs" />
     <Compile Include="Model\StudentClassEnrolment.cs" />
     <Compile Include="Model\StudentContact.cs" />
-    <Compile Include="Model\StudentEnrolledClass.cs" />
     <Compile Include="Model\EnrolledStudent.cs" />
     <Compile Include="Model\StudentHistoryMark.cs" />
     <Compile Include="Model\TeacherAssignment.cs" />
