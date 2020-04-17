@@ -96,7 +96,9 @@ namespace sldataextractor.data
                                     "FROM            " +
                                         "LookupValues " +
                                         "RIGHT OUTER JOIN UserStaff ON LookupValues.iLookupValuesID = UserStaff.iCLEVRRoleid " +
-                                        "RIGHT OUTER JOIN Staff ON  UserStaff.iStaffID = Staff.iStaffID";
+                                        "RIGHT OUTER JOIN Staff ON  UserStaff.iStaffID = Staff.iStaffID " +
+                                    "WHERE " +
+                                        "Staff.cLastName <> 'egov'; ";
 
         public StaffRepository(string ConnectionString)
         {

@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\sldataextractor.data\sldataextractor.data.csproj" />
-    <ProjectReference Include="..\sldataextractor.exportformats\sldataextractor.exportformats.csproj" />
     <ProjectReference Include="..\sldataextractor.model\sldataextractor.model.csproj" />
     <ProjectReference Include="..\sldataextractor.util\sldataextractor.util.csproj" />
   </ItemGroup>
