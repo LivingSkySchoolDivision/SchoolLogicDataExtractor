@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Authors>Mark Strendin</Authors>
+    <Company>Living Sky School Division No. 202</Company>
+    <PackageIcon>lssd_dev.png</PackageIcon>
+    <ApplicationIcon></ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\sldataextractor.data\sldataextractor.data.csproj" />
+    <ProjectReference Include="..\sldataextractor.exportfilegenerators\sldataextractor.exportfilegenerators.csproj" />
+    <ProjectReference Include="..\sldataextractor.model\sldataextractor.model.csproj" />
+    <ProjectReference Include="..\sldataextractor.util\sldataextractor.util.csproj" />
+  </ItemGroup>
+
+</Project>
