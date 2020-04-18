@@ -9,20 +9,14 @@ using System.Text;
 
 namespace sldataextractor.exportfilegenerators.Clevr
 {
-    public class ClevrStudentDemographics : IExportFileGenerator
+    public class ClevrStudentDemographics : ExportFileGenerator, IExportFileGenerator
     {
         private const char delimiter = '\t';
         private const string stringContainer = "";
-        private readonly string _dbConnectionString;
-        private readonly string _clevrTenantID = string.Empty;
 
-        public ClevrStudentDemographics(ConfigFile ConfigFile, Dictionary<string, string> Arguments)
-        {
-            this._dbConnectionString = ConfigFile.DatabaseConnectionString;
-            this._clevrTenantID = ConfigFile.ClevrTenantID;
-        }
+        public ClevrStudentDemographics(ConfigFile ConfigFile, Dictionary<string, string> Arguments) : base(ConfigFile, Arguments) { }
 
-        public MemoryStream GenerateCSV()
+        public MemoryStream Generate()
         {
             MemoryStream outStream = new MemoryStream();
             StreamWriter writer = new StreamWriter(outStream);
@@ -74,11 +68,11 @@ namespace sldataextractor.exportfilegenerators.Clevr
 
             writer.Write(Environment.NewLine);
 
-            StudentRepository _studentRepo = new StudentRepository(_dbConnectionString);
+            StudentRepository _studentRepo = new StudentRepository(_configFile.DatabaseConnectionString);
 
-            foreach (Student student in _studentRepo.GetAll().OrderBy(s => s.BaseSchool.Name).ThenBy(s => s.DisplayNameLastNameFirst))
+            foreach (Student student in _studentRepo.GetAllActive().OrderBy(s => s.BaseSchool.Name).ThenBy(s => s.DisplayNameLastNameFirst))
             {
-                writer.Write(stringContainer + _clevrTenantID + "" + stringContainer + delimiter);
+                writer.Write(stringContainer + _configFile.ClevrTenantID + "" + stringContainer + delimiter);
                 writer.Write(stringContainer + student.StudentNumber + stringContainer + delimiter);
                 writer.Write(stringContainer + student.StudentNumber + stringContainer + delimiter);
                 writer.Write(stringContainer + student.LastName + stringContainer + delimiter);

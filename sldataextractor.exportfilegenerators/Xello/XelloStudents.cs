@@ -9,22 +9,18 @@ using System.Text;
 
 namespace sldataextractor.exportfilegenerators.Xello
 {
-    public class XelloStudents : IExportFileGenerator
+    public class XelloStudents : ExportFileGenerator, IExportFileGenerator
     {
         private const string delimiter = "|";
         private const string stringContainer = "";
         private readonly List<string> gradeList = new List<string>() { "12", "11", "10", "9", "8", "7", "09", "08", "07", "6", "06", "5", "05" };
-        private readonly string _dbConnectionString;
 
         // https://public.careercruising.com/us/en/support/onboarding/repetitive-data-transfer-student-and-course/
 
 
-        public XelloStudents(ConfigFile ConfigFile, Dictionary<string, string> Arguments)
-        {
-            this._dbConnectionString = ConfigFile.DatabaseConnectionString;
-        }
+        public XelloStudents(ConfigFile ConfigFile, Dictionary<string, string> Arguments) : base(ConfigFile, Arguments) { }
 
-        public MemoryStream GenerateCSV()
+        public MemoryStream Generate()
         {
             MemoryStream outStream = new MemoryStream();
             StreamWriter writer = new StreamWriter(outStream);
@@ -41,9 +37,9 @@ namespace sldataextractor.exportfilegenerators.Xello
             writer.Write("Email");
             writer.Write(Environment.NewLine);
 
-            StudentRepository _studentRepo = new StudentRepository(_dbConnectionString);
+            StudentRepository _studentRepo = new StudentRepository(_configFile.DatabaseConnectionString);
 
-            foreach (Student student in _studentRepo.GetAll().Where(s => gradeList.Contains(s.Grade)).OrderBy(s => s.BaseSchool.Name).ThenBy(s => s.DisplayNameLastNameFirst))
+            foreach (Student student in _studentRepo.GetAllActive().Where(s => gradeList.Contains(s.Grade)).OrderBy(s => s.BaseSchool.Name).ThenBy(s => s.DisplayNameLastNameFirst))
             {
                 writer.Write(stringContainer + student.StudentNumber + stringContainer + delimiter);
                 writer.Write(stringContainer + student.FirstName + stringContainer + delimiter);

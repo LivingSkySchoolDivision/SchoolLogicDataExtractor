@@ -11,18 +11,13 @@ namespace sldataextractor.exportfilegenerators.Clever
     // Don't send them empty classes
 
 
-    public class CleverSections : IExportFileGenerator
+    public class CleverSections : ExportFileGenerator, IExportFileGenerator
     {
         private const char delimiter = ',';
         private const string stringContainer = "\"";
-        private readonly string _dbConnectionString;
 
-        public CleverSections(ConfigFile ConfigFile, Dictionary<string, string> Arguments)
-        {
-            this._dbConnectionString = ConfigFile.DatabaseConnectionString;
-        }
-
-        public MemoryStream GenerateCSV()
+        public CleverSections(ConfigFile ConfigFile, Dictionary<string, string> Arguments) : base(ConfigFile, Arguments) { }
+        public MemoryStream Generate()
         {
             MemoryStream outStream = new MemoryStream();
             StreamWriter writer = new StreamWriter(outStream);
@@ -54,10 +49,10 @@ namespace sldataextractor.exportfilegenerators.Clever
 
             writer.Write(Environment.NewLine);
 
-            SchoolClassRepository screpo = new SchoolClassRepository(_dbConnectionString);
+            SchoolClassRepository screpo = new SchoolClassRepository(_configFile.DatabaseConnectionString);
             List<SchoolClass> sections = screpo.GetAll();
 
-            TeacherAssignmentRepository teacherAssignmentRepo = new TeacherAssignmentRepository(_dbConnectionString);
+            TeacherAssignmentRepository teacherAssignmentRepo = new TeacherAssignmentRepository(_configFile.DatabaseConnectionString);
             List<TeacherAssignment> allTeachingAssignments = teacherAssignmentRepo.GetAll();
 
             // Sort teacher assignments into a dictionary for easier consumption
@@ -65,7 +60,7 @@ namespace sldataextractor.exportfilegenerators.Clever
             Dictionary<int, List<TeacherAssignment>> assignmentsByClassID = new Dictionary<int, List<TeacherAssignment>>();
 
             // Don't send empty classes, so get enrolment counts for each class
-            StudentClassEnrolmentRepository enrolmentRepo = new StudentClassEnrolmentRepository(_dbConnectionString);
+            StudentClassEnrolmentRepository enrolmentRepo = new StudentClassEnrolmentRepository(_configFile.DatabaseConnectionString);
             Dictionary<int, int> enrolmentCountsByClassID = enrolmentRepo.GetEnrolmentCountsByClassID();
 
             foreach (TeacherAssignment ta in allTeachingAssignments)

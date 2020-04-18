@@ -9,20 +9,14 @@ using System.Text;
 
 namespace sldataextractor.exportfilegenerators.Clevr
 {
-    public class ClevrStaffList : IExportFileGenerator
+    public class ClevrStaffList : ExportFileGenerator, IExportFileGenerator
     {
         private const char delimiter = '\t';
         private const string stringContainer = "";
-        private readonly string _dbConnectionString;
-        private readonly string _clevrTenantID = string.Empty;
 
-        public ClevrStaffList(ConfigFile ConfigFile, Dictionary<string, string> Arguments)
-        {
-            this._dbConnectionString = ConfigFile.DatabaseConnectionString;
-            this._clevrTenantID = ConfigFile.ClevrTenantID;
-        }
+        public ClevrStaffList(ConfigFile ConfigFile, Dictionary<string, string> Arguments) : base(ConfigFile, Arguments) { }
 
-        public MemoryStream GenerateCSV()
+        public MemoryStream Generate()
         {
             MemoryStream outStream = new MemoryStream();
             StreamWriter writer = new StreamWriter(outStream);
@@ -45,11 +39,11 @@ namespace sldataextractor.exportfilegenerators.Clevr
             writer.Write("password" + delimiter);
             writer.Write(Environment.NewLine);
 
-            StaffRepository _staffRepo = new StaffRepository(_dbConnectionString);
+            StaffRepository _staffRepo = new StaffRepository(_configFile.DatabaseConnectionString);
             List<StaffMember> allStaff = _staffRepo.GetAll();
             foreach (StaffMember staff in allStaff.Where(s => s.IsEnabled))
             {
-                writer.Write(_clevrTenantID + "" + delimiter);
+                writer.Write(_configFile.ClevrTenantID + "" + delimiter);
                 writer.Write(stringContainer + staff.iStaffId + stringContainer + delimiter);
                 writer.Write(stringContainer + staff.iStaffId + stringContainer + delimiter);
                 writer.Write(stringContainer + staff.School.DAN + stringContainer + delimiter);

@@ -8,22 +8,17 @@ using System.Text;
 
 namespace sldataextractor.exportfilegenerators.Clever
 {
-    public class CleverStaff : IExportFileGenerator
+    public class CleverStaff : ExportFileGenerator, IExportFileGenerator
     {
         private const char delimiter = ',';
         private const string stringContainer = "\"";
-        private readonly string _dbConnectionString;
 
         // Teachers and Staff are different things to Clever
         // Make the teacher list by first making a section  list
         // Make the staff list by first making the teacher list, and including everybody else
 
-        public CleverStaff(ConfigFile ConfigFile, Dictionary<string, string> Arguments)
-        {
-            this._dbConnectionString = ConfigFile.DatabaseConnectionString;
-        }
-
-        public MemoryStream GenerateCSV()
+        public CleverStaff(ConfigFile ConfigFile, Dictionary<string, string> Arguments) : base(ConfigFile, Arguments) { }
+        public MemoryStream Generate()
         {
             MemoryStream outStream = new MemoryStream();
             StreamWriter writer = new StreamWriter(outStream);
@@ -41,16 +36,16 @@ namespace sldataextractor.exportfilegenerators.Clever
 
             writer.Write(Environment.NewLine);
 
-            StaffRepository _staffRepo = new StaffRepository(_dbConnectionString);
+            StaffRepository _staffRepo = new StaffRepository(_configFile.DatabaseConnectionString);
             List<StaffMember> allStaff = _staffRepo.GetAll();
             List<string> seenTeacherCertNumbers = new List<string>();
 
             // Get all sections
-            SchoolClassRepository screpo = new SchoolClassRepository(_dbConnectionString);
+            SchoolClassRepository screpo = new SchoolClassRepository(_configFile.DatabaseConnectionString);
             List<SchoolClass> sections = screpo.GetAll();
 
             // Get all teacher assignments
-            TeacherAssignmentRepository teacherAssignmentRepo = new TeacherAssignmentRepository(_dbConnectionString);
+            TeacherAssignmentRepository teacherAssignmentRepo = new TeacherAssignmentRepository(_configFile.DatabaseConnectionString);
             List<TeacherAssignment> allTeachingAssignments = teacherAssignmentRepo.GetAll();
 
             // Sort teacher assignments into a dictionary for easier consumption

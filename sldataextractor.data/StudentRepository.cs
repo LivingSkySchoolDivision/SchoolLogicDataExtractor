@@ -190,7 +190,7 @@ namespace sldataextractor.data
             };
         }
 
-        public List<Student> GetAll()
+        public List<Student> GetAllActive()
         {
             return _allStudents.Values.OrderBy(x => x.LastName).ThenBy(x => x.FirstName).ToList();
         }

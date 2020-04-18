@@ -12,6 +12,7 @@ namespace sldataextractor.model
         public bool LivesWithStudent { get; set; }
         public int Priority { get; set; }
         public bool CanAccessHomelogic { get; set; }
+        public bool NotifyOverride { get; set; }
 
         public StudentContact()
         {

@@ -9,18 +9,14 @@ using System.Text;
 
 namespace sldataextractor.exportfilegenerators.Xello
 {
-    public class XelloCourseCodes : IExportFileGenerator
+    public class XelloCourseCodes : ExportFileGenerator, IExportFileGenerator
     {
         private const string delimiter = "|";
         private const string stringContainer = "";
-        private readonly string _dbConnectionString;
 
-        public XelloCourseCodes(ConfigFile ConfigFile, Dictionary<string, string> Arguments)
-        {
-            this._dbConnectionString = ConfigFile.DatabaseConnectionString;
-        }
+        public XelloCourseCodes(ConfigFile ConfigFile, Dictionary<string, string> Arguments) : base(ConfigFile, Arguments) { }
 
-        public MemoryStream GenerateCSV()
+        public MemoryStream Generate()
         {
             MemoryStream outStream = new MemoryStream();
             StreamWriter writer = new StreamWriter(outStream);
@@ -40,9 +36,9 @@ namespace sldataextractor.exportfilegenerators.Xello
             // Get all classes
             // Make a list of all courses offered
 
-            SchoolClassRepository classRepository = new SchoolClassRepository(_dbConnectionString);
-            CourseRepository courseRepository = new CourseRepository(_dbConnectionString);
-            SchoolRepository schoolRepo = new SchoolRepository(_dbConnectionString);
+            SchoolClassRepository classRepository = new SchoolClassRepository(_configFile.DatabaseConnectionString);
+            CourseRepository courseRepository = new CourseRepository(_configFile.DatabaseConnectionString);
+            SchoolRepository schoolRepo = new SchoolRepository(_configFile.DatabaseConnectionString);
 
             List<Course> coursesWithCredits = courseRepository.GetAll().Where(x => x.Credits > 0 && x.CurrentlyOffered).ToList();
 

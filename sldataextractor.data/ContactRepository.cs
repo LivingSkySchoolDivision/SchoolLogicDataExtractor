@@ -51,6 +51,7 @@ namespace sldataextractor.data
                                                             "ContactRelation.lLivesWithStudent,  " +
                                                             "ContactRelation.lMail,  " +
                                                             "ContactRelation.iContactPriority,  " +
+                                                            "ContactRelation.Notify,  " +
                                                             "ContactRelation.iSchoolID " +
                                                         "FROM             " +
                                                             "ContactRelation  " +
@@ -201,7 +202,8 @@ namespace sldataextractor.data
                     Relation = dataReader["Relation"].ToString().Trim(),
                     LivesWithStudent = Parsers.ParseBool(dataReader["lLivesWithStudent"].ToString().Trim()),
                     Priority = Parsers.ParseInt(dataReader["iContactPriority"].ToString().Trim()),
-                    CanAccessHomelogic = Parsers.ParseBool(dataReader["lMail"].ToString().Trim())
+                    CanAccessHomelogic = Parsers.ParseBool(dataReader["lMail"].ToString().Trim()),
+                    NotifyOverride = Parsers.ParseBool(dataReader["Notify"].ToString().Trim())
                 };
             }
             else

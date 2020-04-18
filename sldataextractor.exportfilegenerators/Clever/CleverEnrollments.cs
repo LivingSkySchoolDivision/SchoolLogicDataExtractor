@@ -8,18 +8,13 @@ using System.Text;
 
 namespace sldataextractor.exportfilegenerators.Clever
 {
-    public class CleverEnrollments : IExportFileGenerator
+    public class CleverEnrollments : ExportFileGenerator, IExportFileGenerator
     {
         private const char delimiter = ',';
         private const string stringContainer = "\"";
-        private readonly string _dbConnectionString;
+        public CleverEnrollments(ConfigFile ConfigFile, Dictionary<string, string> Arguments) : base(ConfigFile, Arguments) { }
 
-        public CleverEnrollments(ConfigFile ConfigFile, Dictionary<string, string> Arguments)
-        {
-            this._dbConnectionString = ConfigFile.DatabaseConnectionString;
-        }
-
-        public MemoryStream GenerateCSV()
+        public MemoryStream Generate()
         {
             MemoryStream outStream = new MemoryStream();
             StreamWriter writer = new StreamWriter(outStream);
@@ -30,7 +25,7 @@ namespace sldataextractor.exportfilegenerators.Clever
             writer.Write("Student_id" + delimiter);
             writer.Write(Environment.NewLine);
 
-            StudentClassEnrolmentRepository studentClassEnrolmentRepo = new StudentClassEnrolmentRepository(_dbConnectionString);
+            StudentClassEnrolmentRepository studentClassEnrolmentRepo = new StudentClassEnrolmentRepository(_configFile.DatabaseConnectionString);
 
             List<StudentClassEnrolment> studentEnrolments = studentClassEnrolmentRepo.GetAll();
 

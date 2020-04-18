@@ -13,18 +13,15 @@ namespace sldataextractor.exportfilegenerators.Clever
      * To do multiple contacts for a student, duplicate the student's row and put additional contacts on the duplicated rows
      */
 
-    public class CleverStudents : IExportFileGenerator
+    public class CleverStudents : ExportFileGenerator, IExportFileGenerator
     {
         private const char delimiter = ',';
         private const string stringContainer = "\"";
-        private readonly string _dbConnectionString;
 
-        public CleverStudents(ConfigFile ConfigFile, Dictionary<string, string> Arguments)
-        {
-            this._dbConnectionString = ConfigFile.DatabaseConnectionString;
-        }
+        public CleverStudents(ConfigFile ConfigFile, Dictionary<string, string> Arguments) : base(ConfigFile, Arguments) { }
+        
 
-        public MemoryStream GenerateCSV()
+        public MemoryStream Generate()
         {
             MemoryStream outStream = new MemoryStream();
             StreamWriter writer = new StreamWriter(outStream);
@@ -66,9 +63,9 @@ namespace sldataextractor.exportfilegenerators.Clever
 
             writer.Write(Environment.NewLine);
 
-            StudentRepository _studentRepo = new StudentRepository(_dbConnectionString);
-            List<Student> students = _studentRepo.GetAll();
-            ContactRepository _contactRepo = new ContactRepository(_dbConnectionString);
+            StudentRepository _studentRepo = new StudentRepository(_configFile.DatabaseConnectionString);
+            List<Student> students = _studentRepo.GetAllActive();
+            ContactRepository _contactRepo = new ContactRepository(_configFile.DatabaseConnectionString);
 
             foreach (Student student in students)
             {

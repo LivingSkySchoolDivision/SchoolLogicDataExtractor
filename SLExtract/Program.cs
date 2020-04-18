@@ -30,8 +30,15 @@ namespace SLExtract
             { "/help, /h, /?", "Display this help message." }
         };
 
+        private static readonly Dictionary<string, Dictionary<string, string>> _reportSpecificCommands = new Dictionary<string, Dictionary<string, string>>() 
+        { 
+
+        };
+
+
         private static readonly Dictionary<string, System.Type> _validReports = new Dictionary<string, System.Type>()
         {
+            { "schoolmessengeraddressbook", typeof(sldataextractor.exportfilegenerators.SchoolMessenger.SchoolMessengerAddressBook) },
             { "busplannerstudents", typeof(sldataextractor.exportfilegenerators.BusPlanner.BusPlannerStudents) },
             { "cleverenrollments", typeof(sldataextractor.exportfilegenerators.Clever.CleverEnrollments) },
             { "cleverschools", typeof(sldataextractor.exportfilegenerators.Clever.CleverSchools) },
@@ -109,7 +116,7 @@ namespace SLExtract
                         IExportFileGenerator generator = (IExportFileGenerator)Activator.CreateInstance(kvp.Value,configFile, Arguments);
 
                         // Try to make the file?
-                        MemoryStream exportFileContents = generator.GenerateCSV();
+                        MemoryStream exportFileContents = generator.Generate();
                         SaveFile(exportFileContents, kvp.Key);
                         perExportStopwatch.Stop();
                         Console.WriteLine(perExportStopwatch.Elapsed);
@@ -158,7 +165,7 @@ namespace SLExtract
                                 IExportFileGenerator generator = (IExportFileGenerator)Activator.CreateInstance(generatorType, configFile, Arguments);
 
                                 // Try to make the file?
-                                MemoryStream exportFileContents = generator.GenerateCSV();
+                                MemoryStream exportFileContents = generator.Generate();
                                 SaveFile(exportFileContents, destinationFilename);                                
                             } else
                             {

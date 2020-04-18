@@ -8,18 +8,14 @@ using System.Text;
 
 namespace sldataextractor.exportfilegenerators.BusPlanner
 {
-    public class BusPlannerStudents : IExportFileGenerator
+    public class BusPlannerStudents : ExportFileGenerator, IExportFileGenerator
     {
         private const char separator = '\t';
         private const string stringContainer = "\"";
-        private readonly string _dbConnectionString;
 
-        public BusPlannerStudents(ConfigFile ConfigFile, Dictionary<string, string> Arguments)
-        {
-            this._dbConnectionString = ConfigFile.DatabaseConnectionString;
-        }
+        public BusPlannerStudents(ConfigFile ConfigFile, Dictionary<string, string> Arguments) : base(ConfigFile, Arguments) { }
 
-        public MemoryStream GenerateCSV()
+        public MemoryStream Generate()
         {
             MemoryStream csvFile = new MemoryStream();
             StreamWriter writer = new StreamWriter(csvFile, Encoding.UTF8);
@@ -69,9 +65,9 @@ namespace sldataextractor.exportfilegenerators.BusPlanner
 
 
 
-            StudentRepository repo = new StudentRepository(_dbConnectionString);
+            StudentRepository repo = new StudentRepository(_configFile.DatabaseConnectionString);
 
-            foreach (Student student in repo.GetAll())
+            foreach (Student student in repo.GetAllActive())
             {
                 StringBuilder csvLine = new StringBuilder();
                 csvLine.Append("\"" + student.BaseSchool.DAN); csvLine.Append("\"" + separator);

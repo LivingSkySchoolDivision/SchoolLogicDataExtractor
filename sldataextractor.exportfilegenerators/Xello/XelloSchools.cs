@@ -8,18 +8,14 @@ using System.Text;
 
 namespace sldataextractor.exportfilegenerators.Xello
 {
-    public class XelloSchools : IExportFileGenerator
+    public class XelloSchools : ExportFileGenerator, IExportFileGenerator
     {
         private const string delimiter = "|";
         private const string stringContainer = "";
-        private readonly string _dbConnectionString;
 
-        public XelloSchools(ConfigFile ConfigFile, Dictionary<string, string> Arguments)
-        {
-            this._dbConnectionString = ConfigFile.DatabaseConnectionString;
-        }
+        public XelloSchools(ConfigFile ConfigFile, Dictionary<string, string> Arguments) : base(ConfigFile, Arguments) { }
 
-        public MemoryStream GenerateCSV()
+        public MemoryStream Generate()
         {
             MemoryStream outStream = new MemoryStream();
             StreamWriter writer = new StreamWriter(outStream);
@@ -30,7 +26,7 @@ namespace sldataextractor.exportfilegenerators.Xello
             writer.Write("SchoolType");
             writer.Write(Environment.NewLine);
 
-            SchoolRepository _schoolRepo = new SchoolRepository(_dbConnectionString);
+            SchoolRepository _schoolRepo = new SchoolRepository(_configFile.DatabaseConnectionString);
 
             foreach (School school in _schoolRepo.GetAll())
             {

@@ -9,25 +9,20 @@ using System.Text;
 
 namespace sldataextractor.exportfilegenerators.Xello
 {
-    public class XelloStudentCourses : IExportFileGenerator
+    public class XelloStudentCourses : ExportFileGenerator, IExportFileGenerator
     {
         private const string delimiter = "|";
         private const string stringContainer = "";
         private readonly List<string> gradeList = new List<string>() { "12", "11", "10", "9", "8", "7", "09", "08", "07" };
-        private readonly string _dbConnectionString;
 
-        public XelloStudentCourses(ConfigFile ConfigFile, Dictionary<string, string> Arguments)
-        {
-            this._dbConnectionString = ConfigFile.DatabaseConnectionString;
-        }
-
+        public XelloStudentCourses(ConfigFile ConfigFile, Dictionary<string, string> Arguments) : base(ConfigFile, Arguments) { }
 
 
         // This file contains:
         //  Student history marks
         //  Student currently enroled classes that have a credit
 
-        public MemoryStream GenerateCSV()
+        public MemoryStream Generate()
         {
             MemoryStream outStream = new MemoryStream();
             StreamWriter writer = new StreamWriter(outStream);
@@ -44,9 +39,9 @@ namespace sldataextractor.exportfilegenerators.Xello
             writer.Write("CoursePart");
             writer.Write(Environment.NewLine);
 
-            StudentRepository studentRepo = new StudentRepository(_dbConnectionString);
-            StudentClassEnrolmentRepository enrolmentRepo = new StudentClassEnrolmentRepository(_dbConnectionString);
-            StudentHistoryMarkRepository historyMarkRepo = new StudentHistoryMarkRepository(_dbConnectionString);
+            StudentRepository studentRepo = new StudentRepository(_configFile.DatabaseConnectionString);
+            StudentClassEnrolmentRepository enrolmentRepo = new StudentClassEnrolmentRepository(_configFile.DatabaseConnectionString);
+            StudentHistoryMarkRepository historyMarkRepo = new StudentHistoryMarkRepository(_configFile.DatabaseConnectionString);
 
 
             // Load all enrolments into a dictionary for easier parsing
@@ -61,7 +56,7 @@ namespace sldataextractor.exportfilegenerators.Xello
                 enrolmentsByStudent[e.Student.iStudentID].Add(e);
             }
 
-            foreach (Student student in studentRepo.GetAll().Where(s => gradeList.Contains(s.Grade)))
+            foreach (Student student in studentRepo.GetAllActive().Where(s => gradeList.Contains(s.Grade)))
             {
                 // ************************************
                 // History marks

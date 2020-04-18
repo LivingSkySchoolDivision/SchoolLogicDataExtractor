@@ -9,18 +9,15 @@ using System.Text;
 
 namespace sldataextractor.exportfilegenerators.Clever
 {
-    public class CleverSchools : IExportFileGenerator
+    public class CleverSchools : ExportFileGenerator, IExportFileGenerator
     {
         private const char delimiter = ',';
         private const string stringContainer = "\"";
-        private readonly string _dbConnectionString;
 
-        public CleverSchools(ConfigFile ConfigFile, Dictionary<string, string> Arguments)
-        {
-            this._dbConnectionString = ConfigFile.DatabaseConnectionString;
-        }
+        public CleverSchools(ConfigFile ConfigFile, Dictionary<string, string> Arguments) : base(ConfigFile, Arguments) { }
+        
 
-        public MemoryStream GenerateCSV()
+        public MemoryStream Generate()
         {
             MemoryStream outStream = new MemoryStream();
             StreamWriter writer = new StreamWriter(outStream);
@@ -43,7 +40,7 @@ namespace sldataextractor.exportfilegenerators.Clever
 
             writer.Write(Environment.NewLine);
 
-            SchoolRepository _schoolRepo = new SchoolRepository(_dbConnectionString);
+            SchoolRepository _schoolRepo = new SchoolRepository(_configFile.DatabaseConnectionString);
             List<School> schools = _schoolRepo.GetAll();
 
             foreach (School school in schools.Where(x => x.isFake == false))

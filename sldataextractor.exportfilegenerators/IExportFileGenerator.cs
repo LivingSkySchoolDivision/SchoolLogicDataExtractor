@@ -7,6 +7,6 @@ namespace sldataextractor.exportfilegenerators
 {
     public interface IExportFileGenerator
     {
-        public MemoryStream GenerateCSV();
+        public MemoryStream Generate();
     }
 }
