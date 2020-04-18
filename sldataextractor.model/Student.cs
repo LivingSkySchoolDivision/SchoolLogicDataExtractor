@@ -67,6 +67,9 @@ namespace sldataextractor.model
         public string HomePhone { get; set; }
         public string Medical { get; set; }
         public string SaskLearningNumber { get; set; }
+        public string ReserveName { get; set; }
+        public string ReserveHouse { get; set; }
+        public LandDescription LandDescription { get; set; }
         public string DisplayName
         {
             get
@@ -91,6 +94,7 @@ namespace sldataextractor.model
             this.BaseSchool = new School();
             this.PreviousSchool = new School();
             this.Contacts = new List<StudentContact>();
+            this.LandDescription = new LandDescription();
         }
 
         public override string ToString()

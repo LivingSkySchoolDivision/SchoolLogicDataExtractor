@@ -32,6 +32,7 @@ namespace SLExtract
 
         private static readonly Dictionary<string, System.Type> _validReports = new Dictionary<string, System.Type>()
         {
+            { "busplannerstudents", typeof(sldataextractor.exportfilegenerators.BusPlanner.BusPlannerStudents) },
             { "cleverenrollments", typeof(sldataextractor.exportfilegenerators.Clever.CleverEnrollments) },
             { "cleverschools", typeof(sldataextractor.exportfilegenerators.Clever.CleverSchools) },
             { "cleversections", typeof(sldataextractor.exportfilegenerators.Clever.CleverSections) },
@@ -154,7 +155,7 @@ namespace SLExtract
                         {
                             if (typeof(IExportFileGenerator).IsAssignableFrom(generatorType))
                             {
-                                IExportFileGenerator generator = (IExportFileGenerator)Activator.CreateInstance(generatorType, new[] { configFile });
+                                IExportFileGenerator generator = (IExportFileGenerator)Activator.CreateInstance(generatorType, configFile, Arguments);
 
                                 // Try to make the file?
                                 MemoryStream exportFileContents = generator.GenerateCSV();
