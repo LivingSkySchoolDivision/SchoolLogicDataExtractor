@@ -19,44 +19,52 @@ namespace sldataextractor.data
         private readonly MailingAddressRepository _mailingAddressRepo;
 
         private string SQL = "SELECT         " +
-                                  "StudentStatus.iStudentID,  " +
-                                  "StudentStatus.dInDate,  " +
-                                  "StudentStatus.dOutDate,  " +
-                                  "StudentStatus.lOutsideStatus,  " +
-                                  "StudentStatus.iSchoolID,  " +
-                                  "LookupValues_1.cName AS Gender,  " +
-                                  "LookupValues_1.cCode AS GenderCode,  " +
-                                  "Student.cStudentNumber,  " +
-                                  "Student.cFirstName,  " +
-                                  "Student.cLastName,  " +
-                                  "Student.cLegalFirstName,  " +
-                                  "Student.cLegalLastName,  " +
-                                  "Student.cLegalMiddleName,  " +
-                                  "Student.dBirthdate,  " +
-                                  "Student.iTrackID,  " +
-                                  "Student.iSchoolID AS Expr1,  " +
-                                  "Student.mMedical,  " +
-                                  "Student.mEmail,  " +
-                                  "Student.cGovernmentNumber, " +
-                                  "Location.cPhone,  " +
-                                  "Location.cApartment,  " +
-                                  "Location.cHouseNo,  " +
-                                  "Location.cPostalCode,  " +
-                                  "Location.cStreet,  " +
-                                  "LookupValues_2.cName AS City,  " +
-                                  "LookupValues_3.cName AS Province,  " +
-                                  "Country_1.cName AS Country,  " +
-                                  "Student.cUserName,  " +
-                                  "Homeroom.cName AS HomeroomName,  " +
-                                  "Staff.cFirstName AS HomeroomTeacherfirstname,  " +
-                                  "Staff.cLastName AS HomeroomTeacherLastname,  " +
-                                  "Student.iPrevious_SchoolID, " +
-                                  "(SELECT COUNT(*) AS Expr1 FROM MarksHistory WHERE (iStudentID = StudentStatus.iStudentID) AND (nCreditEarned > 0)) AS Credits,  " +
-                                  "LookupValues_4.cName AS LanguageSpokenAtHome,  " +
-                                  "LookupValues.cName AS CountryOfOrigin,  " +
-                                  "Grades.cName AS Grade, " +
-                                  "Student.mCellPhone , " +
-                                  "LookupValues_5.cName AS mProgram " +
+                                    "StudentStatus.iStudentID,  " +
+                                    "StudentStatus.dInDate,  " +
+                                    "StudentStatus.dOutDate,  " +
+                                    "StudentStatus.lOutsideStatus,  " +
+                                    "StudentStatus.iSchoolID,  " +
+                                    "LookupValues_1.cName AS Gender,  " +
+                                    "LookupValues_1.cCode AS GenderCode,  " +
+                                    "Student.cStudentNumber,  " +
+                                    "Student.cFirstName,  " +
+                                    "Student.cLastName,  " +
+                                    "Student.cLegalFirstName,  " +
+                                    "Student.cLegalLastName,  " +
+                                    "Student.cLegalMiddleName,  " +
+                                    "Student.dBirthdate,  " +
+                                    "Student.iTrackID,  " +
+                                    "Student.iSchoolID AS Expr1,  " +
+                                    "Student.mMedical,  " +
+                                    "Student.mEmail,  " +
+                                    "Student.cGovernmentNumber, " +
+                                    "Location.cPhone,  " +
+                                    "Location.cApartment,  " +
+                                    "Location.cHouseNo,  " +
+                                    "Location.cPostalCode,  " +
+                                    "Location.cStreet,  " +
+                                    "LookupValues_2.cName AS City,  " +
+                                    "LookupValues_3.cName AS Province,  " +
+                                    "Country_1.cName AS Country,  " +
+                                    "Student.cUserName,  " +
+                                    "Homeroom.cName AS HomeroomName,  " +
+                                    "Staff.cFirstName AS HomeroomTeacherfirstname,  " +
+                                    "Staff.cLastName AS HomeroomTeacherLastname,  " +
+                                    "Student.iPrevious_SchoolID, " +
+                                    "(SELECT COUNT(*) AS Expr1 FROM MarksHistory WHERE (iStudentID = StudentStatus.iStudentID) AND (nCreditEarned > 0)) AS Credits,  " +
+                                    "LookupValues_4.cName AS LanguageSpokenAtHome,  " +
+                                    "LookupValues.cName AS CountryOfOrigin,  " +
+                                    "Grades.cName AS Grade, " +
+                                    "Student.mCellPhone , " +
+                                    "LookupValues_5.cName AS mProgram, " +
+                                    "LV_LD_Q.cName AS Quarter, " +
+                                    "LV_LD_S.cName AS Section, " +
+                                    "LV_LD_T.cName AS Township, " +
+                                    "LV_LD_R.cName AS Range, " +
+                                    "LV_LD_M.cName AS Meridian, " +
+                                    "LV_LD_RL.cName AS RiverLot, " +
+                                    "UserStudent.cReserveName, " +
+                                    "UserStudent.cReserveHouse " +
                             "FROM " +
                                     "UserStudent " +
                                     "RIGHT OUTER JOIN Country AS Country_1 " +
@@ -74,6 +82,12 @@ namespace sldataextractor.data
                                     "LEFT OUTER JOIN LookupValues AS LookupValues_1 ON Student.iLV_GenderID = LookupValues_1.iLookupValuesID " +
                                     "RIGHT OUTER JOIN StudentStatus ON Student.iStudentID = StudentStatus.iStudentID " +
                                     "LEFT OUTER JOIN LookupValues AS LookupValues_5 ON UserStudent.UF_1658=LookupValues_5.iLookupValuesID " +
+                                    "LEFT OUTER JOIN LookupValues AS LV_LD_Q ON UserStudent.UF_1651=LV_LD_Q.iLookupValuesID " +
+                                    "LEFT OUTER JOIN LookupValues AS LV_LD_S ON UserStudent.UF_2098=LV_LD_S.iLookupValuesID " +
+                                    "LEFT OUTER JOIN LookupValues AS LV_LD_T ON UserStudent.UF_1653_1=LV_LD_T.iLookupValuesID " +
+                                    "LEFT OUTER JOIN LookupValues AS LV_LD_R ON UserStudent.UF_1654_1=LV_LD_R.iLookupValuesID " +
+                                    "LEFT OUTER JOIN LookupValues AS LV_LD_M ON UserStudent.UF_2093=LV_LD_M.iLookupValuesID " +
+                                    "LEFT OUTER JOIN LookupValues AS LV_LD_RL ON UserStudent.UF_2096=LV_LD_RL.iLookupValuesID " +
 
                             "WHERE         " +
                                   "(StudentStatus.lOutsideStatus = 0)  " +
@@ -148,6 +162,17 @@ namespace sldataextractor.data
                     Country = dataReader["Country"].ToString().Trim().ToSingleLine(),
                     Phone = dataReader["cPhone"].ToString().Trim(),
                 },
+                LandDescription = new LandDescription()
+                {
+                    Quarter = dataReader["Quarter"].ToString().Trim(),
+                    Section = dataReader["Section"].ToString().Trim(),
+                    Township = dataReader["Township"].ToString().Trim(),
+                    Range = dataReader["Range"].ToString().Trim(),
+                    Meridian = dataReader["Meridian"].ToString().Trim(),
+                    RiverLot = dataReader["RiverLot"].ToString().Trim(),
+                },
+                ReserveName = dataReader["cReserveName"].ToString().Trim(),
+                ReserveHouse = dataReader["cReserveHouse"].ToString().Trim(),
                 PreviousSchool = _schoolRepo.Get(Parsers.ParseInt(dataReader["iPrevious_SchoolID"].ToString().Trim())),
                 HomeLanguage = dataReader["LanguageSpokenAtHome"].ToString().Trim(),
                 CountryOfOrigin = dataReader["CountryOfOrigin"].ToString().Trim(),
