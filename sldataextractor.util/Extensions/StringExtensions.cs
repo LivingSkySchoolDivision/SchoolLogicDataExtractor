@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Security;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -8,6 +9,72 @@ namespace sldataextractor.util.Extensions
 {
     public static class StringExtensions
     {
+        public static List<string> SplitIntoLines(this string inputString, int LineLength)
+        {
+            List<string> returnMe = new List<string>();
+
+            int lastSeenSpace = 0;
+            int lastEnding = 0;
+            int lengthCounter = 0;
+            for (int inputPosition = 0; inputPosition < inputString.Length; inputPosition++)
+            {
+                if (inputString[inputPosition] == ' ')
+                {
+                    lastSeenSpace = inputPosition;
+                }
+
+                if (lengthCounter >= LineLength)
+                {
+                    // Snip the string at the last space found
+                    returnMe.Add(inputString.Substring(lastEnding, lastSeenSpace - lastEnding).Trim());
+                    lastEnding = lastSeenSpace;
+
+                    // Reset the length counter
+                    lengthCounter = 0;
+                }
+
+                lengthCounter++;
+            }
+
+            // If we have any left over add it to the return
+            returnMe.Add(inputString.Substring(lastEnding, inputString.Length - lastEnding).Trim());
+
+            return returnMe;
+        }
+
+
+        public static List<string> SplidfghdfghtIntoLines(this string inputString, int LineLength)
+        {
+            List<string> returnMe = new List<string>();
+            int stringPosition = 0;
+            int inputStringLength = inputString.Length;
+
+            while (stringPosition < inputStringLength)
+            {
+                int captureLength = LineLength;
+                if (stringPosition + captureLength > inputStringLength)
+                {
+                    captureLength = inputStringLength - stringPosition;
+                }
+
+                // Nudge the cutoff to the left until we find a space character
+                // so we don't cut off half of a word
+                for (int x = stringPosition + captureLength; x < stringPosition; x--)
+                {
+                    if (inputString[x] == ' ')
+                    {
+                        captureLength -= x;
+                        break;
+                    }
+                }
+
+                returnMe.Add(inputString.Substring(stringPosition, captureLength));
+                stringPosition = stringPosition + captureLength;
+            }
+
+            return returnMe;
+        }
+
         public static string RemoveSpecialCharacters(this string inputString)
         {
             string allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

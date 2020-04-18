@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolLogicDataExtractor", "SchoolLogicDataExtractor\SchoolLogicDataExtractor.csproj", "{D34415CD-B22A-449E-BDFA-B13A4EF4748B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sldataextractor.util", "sldataextractor.util\sldataextractor.util.csproj", "{093ECA1D-3064-48B4-82BF-CDE84F349021}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sldataextractor.model", "sldataextractor.model\sldataextractor.model.csproj", "{7501C366-D862-4D45-BF2A-449B37C13AA4}"
@@ -21,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D34415CD-B22A-449E-BDFA-B13A4EF4748B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D34415CD-B22A-449E-BDFA-B13A4EF4748B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D34415CD-B22A-449E-BDFA-B13A4EF4748B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D34415CD-B22A-449E-BDFA-B13A4EF4748B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{093ECA1D-3064-48B4-82BF-CDE84F349021}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{093ECA1D-3064-48B4-82BF-CDE84F349021}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{093ECA1D-3064-48B4-82BF-CDE84F349021}.Release|Any CPU.ActiveCfg = Release|Any CPU
